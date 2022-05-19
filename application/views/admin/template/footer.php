@@ -56,9 +56,24 @@
 <script src="<?= base_url(); ?>assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?= base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?= base_url(); ?>assets/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable()
+
+    let Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    
+    if ('<?= $this->session->success; ?>') {
+      Toast.fire({
+        icon: 'success',
+        title: '<?= $this->session->success; ?>',
+      })
+    }
   });
 </script>
 </body>

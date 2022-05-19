@@ -74,19 +74,11 @@
     });
     
     if ('<?= $this->session->message; ?>') {
-      console.log('a');
       Toast.fire({
         icon: 'error',
         title: '<?= $this->session->message; ?>',
       })
     }
-
-    $('.swalDefaultError').click(function() {
-      Toast.fire({
-        icon: 'error',
-        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-      })
-    });
   });
 </script>
 </body>

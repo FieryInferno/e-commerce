@@ -6,8 +6,9 @@ class KategoriController extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('admin/kategori/index', [
-      'title'   => 'Kategori',
-      'active'  => 'kategori',
+      'title'     => 'Kategori',
+      'active'    => 'kategori',
+      'kategori'  => $this->KategoriModel->getAll(),
     ]);
 	}
   

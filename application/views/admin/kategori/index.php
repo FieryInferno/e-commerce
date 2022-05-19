@@ -15,10 +15,23 @@
               <tr>
                 <th width="10%">No</th>
                 <th>Nama</th>
+                <th>Aksi</th>
               </tr>
               </thead>
               <tbody>
-
+                <?php
+                  $no = 1;
+                  foreach ($kategori as $key) { ?>
+                    <tr>
+                      <td><?= $no++; ?></td>
+                      <td><?= $key['nama_kategori']; ?></td>
+                      <td>
+                        <a href="<?= base_url(); ?>admin/kategori/<?= $key['id']; ?>" class="btn btn-primary">Edit</a>
+                        <a href="<?= base_url(); ?>admin/kategori/<?= $key['id']; ?>" class="btn btn-danger">Hapus</a>
+                      </td>
+                    </tr>
+                  <?php }
+                ?>
               </tbody>
             </table>
           </div>

@@ -7,4 +7,9 @@ class KategoriModel extends CI_Model {
 	{
     return $this->db->insert('kategori', $this->input->post());
 	}
+
+  public function getAll()
+  {
+    return $this->db->get('kategori')->result_array();
+  }
 }
