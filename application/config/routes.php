@@ -8,3 +8,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin']['get']        = 'AdminController';
 $route['admin/login']['get']  = 'LoginController';
 $route['admin/login']['post'] = 'LoginController/adminAuth';
+
+$route['admin/kategori']['get'] = 'KategoriController';
