@@ -44,4 +44,11 @@ class KategoriController extends CI_Controller {
     $this->session->set_flashdata('success', 'Berhasil edit kategori');
     redirect('/admin/kategori');
 	}
+  
+	public function destroy($id)
+	{
+    $this->KategoriModel->destroy($id);
+    $this->session->set_flashdata('success', 'Berhasil hapus kategori');
+    redirect('/admin/kategori');
+	}
 }

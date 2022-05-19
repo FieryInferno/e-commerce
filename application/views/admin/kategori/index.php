@@ -27,7 +27,38 @@
                       <td><?= $key['nama_kategori']; ?></td>
                       <td>
                         <a href="<?= base_url(); ?>admin/kategori/edit/<?= $key['id']; ?>" class="btn btn-primary">Edit</a>
-                        <a href="<?= base_url(); ?>admin/kategori/<?= $key['id']; ?>" class="btn btn-danger">Hapus</a>
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          data-toggle="modal"
+                          data-target="#modal<?= $key['id']; ?>"
+                        >
+                          Hapus
+                        </button>
+
+                        <div class="modal fade" id="modal<?= $key['id']; ?>">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Konfirmasi Hapus</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <form action="<?= base_url(); ?>admin/kategori/hapus/<?= $key['id']; ?>" method="post">
+                                <div class="modal-body">
+                                  Anda yakin akan menghapus data kategori <b><?= $key['nama_kategori']; ?></b>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-danger">Hapus</button>
+                                </div>
+                              </form>
+                            </div>
+                            <!-- /.modal-content -->
+                          </div>
+                          <!-- /.modal-dialog -->
+                        </div>
                       </td>
                     </tr>
                   <?php }

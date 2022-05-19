@@ -22,4 +22,9 @@ class KategoriModel extends CI_Model {
   {
     return $this->db->get_where('kategori', ['id' => $id])->row_array();
   }
+
+  public function destroy($id)
+  {
+    $this->db->delete('kategori', ['id' => $id]);
+  }
 }
