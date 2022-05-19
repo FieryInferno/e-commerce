@@ -5,11 +5,21 @@ class KategoriModel extends CI_Model {
   
 	public function store()
 	{
-    return $this->db->insert('kategori', $this->input->post());
+    $this->db->insert('kategori', $this->input->post());
 	}
 
   public function getAll()
   {
     return $this->db->get('kategori')->result_array();
+  }
+
+  public function edit($id)
+  {
+    $this->db->where('id', $id)->update('kategori', ['nama_kategori' => $this->input->post('nama_kategori')]);
+  }
+
+  public function getById($id)
+  {
+    return $this->db->get_where('kategori', ['id' => $id])->row_array();
   }
 }

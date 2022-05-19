@@ -26,7 +26,7 @@
                       <td><?= $no++; ?></td>
                       <td><?= $key['nama_kategori']; ?></td>
                       <td>
-                        <a href="<?= base_url(); ?>admin/kategori/<?= $key['id']; ?>" class="btn btn-primary">Edit</a>
+                        <a href="<?= base_url(); ?>admin/kategori/edit/<?= $key['id']; ?>" class="btn btn-primary">Edit</a>
                         <a href="<?= base_url(); ?>admin/kategori/<?= $key['id']; ?>" class="btn btn-danger">Hapus</a>
                       </td>
                     </tr>

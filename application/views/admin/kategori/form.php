@@ -9,11 +9,11 @@
         <div class="card">
           <!-- /.card-header -->
           <!-- form start -->
-          <form action="<?= base_url(); ?>admin/kategori/tambah" method="post">
+          <form action="<?= base_url(); ?>admin/kategori/<?= $type === 'add' ? 'tambah' : 'edit/' . $id; ?>" method="post">
             <div class="card-body">
               <div class="form-group">
                 <label for="namaKategori">Nama Kategori</label>
-                <input type="text" class="form-control" id="namaKategori" placeholder="Masukan Nama Kategori" name="nama_kategori">
+                <input type="text" class="form-control" id="namaKategori" placeholder="Masukan Nama Kategori" name="nama_kategori" value="<?= $type === 'edit' ? $nama_kategori : ''; ?>">
               </div>
             </div>
             <!-- /.card-body -->
