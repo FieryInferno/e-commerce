@@ -96,6 +96,17 @@
               <p>Kategori</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a
+              type="button"
+              class="nav-link"
+              data-toggle="modal"
+              data-target="#logout"
+            >
+            <i class="nav-icon fas fa-sign-out"></i>
+              Logout
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

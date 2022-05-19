@@ -1,15 +1,16 @@
 <?php
   if ( ! function_exists('isLogin'))
   {
-      $CI;
+    $CI;
 
-      function isLogin(){
-        $CI =& get_instance();
+    function isLogin(){
+      $CI =& get_instance();
 
+      if (!str_contains(current_url(), 'logout')) {
         if ($CI->session->admin) {
-            redirect('admin');
-          }
+          redirect('admin');
+        }
       }
-
+    }
   }
 ?>

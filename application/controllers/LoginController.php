@@ -30,4 +30,11 @@ class LoginController extends CI_Controller {
 
     redirect($_SERVER['HTTP_REFERER']);
   }
+
+  public function logout()
+  {
+    $this->session->sess_destroy();
+    $this->session->set_flashdata('success', 'Anda berhasil logout');
+    redirect();
+  }
 }
