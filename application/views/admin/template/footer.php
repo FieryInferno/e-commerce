@@ -81,9 +81,14 @@
 <script src="<?= base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="<?= base_url(); ?>assets/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?= base_url(); ?>assets/adminlte/plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable()
+    $('.select2').select2({
+      placeholder: "Masukan",
+      allowClear: true
+    })
 
     let Toast = Swal.mixin({
       toast: true,
@@ -98,7 +103,25 @@
         title: '<?= $this->session->success; ?>',
       })
     }
+    
+    if ('<?= $this->session->message; ?>') {
+      Toast.fire({
+        icon: 'error',
+        title: '<?= $this->session->message; ?>',
+      })
+    }
   });
+
+  const previewImg = () => {
+    const gambar      = document.querySelector('#image');
+    const imgPreview  = document.querySelector('.img-preview');
+    // label.textContent = gambar.files[0].name;
+    const file = new FileReader();
+    file.readAsDataURL(gambar.files[0]);
+    file.onload = function(e) {
+      imgPreview.src = e.target.result;
+    }
+  }
 </script>
 </body>
 </html>

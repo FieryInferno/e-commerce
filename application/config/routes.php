@@ -16,3 +16,10 @@ $route['admin/kategori/tambah']['post']       = 'KategoriController/store';
 $route['admin/kategori/edit/(:num)']['get']   = 'KategoriController/edit/$1';
 $route['admin/kategori/edit/(:num)']['post']  = 'KategoriController/update/$1';
 $route['admin/kategori/hapus/(:num)']['post'] = 'KategoriController/destroy/$1';
+
+$route['admin/produk']['get']               = 'ProdukController';
+$route['admin/produk/tambah']['get']        = 'ProdukController/create';
+$route['admin/produk/tambah']['post']       = 'ProdukController/store';
+$route['admin/produk/edit/(:num)']['get']   = 'ProdukController/edit/$1';
+$route['admin/produk/edit/(:num)']['post']  = 'ProdukController/update/$1';
+$route['admin/produk/hapus/(:num)']['post'] = 'ProdukController/destroy/$1';

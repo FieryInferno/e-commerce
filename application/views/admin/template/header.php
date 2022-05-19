@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="<?= base_url(); ?>assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url(); ?>assets/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="<?= base_url(); ?>assets/adminlte/plugins/select2/css/select2.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -94,6 +95,12 @@
             <a href="<?= base_url(); ?>admin/kategori" class="nav-link <?= $active === 'kategori' ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-th"></i>
               <p>Kategori</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url(); ?>admin/produk" class="nav-link <?= $active === 'produk' ? 'active' : ''; ?>">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>Produk</p>
             </a>
           </li>
           <li class="nav-item">
