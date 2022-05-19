@@ -10,4 +10,19 @@ class KategoriController extends CI_Controller {
       'active'  => 'kategori',
     ]);
 	}
+  
+	public function create()
+	{
+		$this->load->view('admin/kategori/form', [
+      'title'   => 'Tambah Kategori',
+      'active'  => 'kategori',
+    ]);
+	}
+  
+	public function store()
+	{
+    $this->KategoriModel->store();
+    $this->session->set_flashdata('success', 'Berhasil tambah kategori');
+    redirect('/admin/kategori');
+	}
 }
