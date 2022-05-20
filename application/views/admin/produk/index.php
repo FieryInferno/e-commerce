@@ -14,6 +14,7 @@
               <thead>
               <tr>
                 <th width="10%">No</th>
+                <th width="30%">Gambar</th>
                 <th>Nama</th>
                 <th>Harga</th>
                 <th>Diskon</th>
@@ -27,22 +28,23 @@
                   foreach ($produk as $key) { ?>
                     <tr>
                       <td><?= $no++; ?></td>
+                      <td><img src="<?= base_url(); ?>assets/image/<?= $key['image']; ?>" width="100%"></td>
                       <td><?= $key['nama_produk']; ?></td>
                       <td><?= $key['harga']; ?></td>
                       <td><?= $key['diskon']; ?></td>
                       <td><?= $key['nama_kategori']; ?></td>
                       <td>
-                        <a href="<?= base_url(); ?>admin/produk/edit/<?= $key['id']; ?>" class="btn btn-primary">Edit</a>
+                        <a href="<?= base_url(); ?>admin/produk/edit/<?= $key['id_produk']; ?>" class="btn btn-primary">Edit</a>
                         <button
                           type="button"
                           class="btn btn-danger"
                           data-toggle="modal"
-                          data-target="#modal<?= $key['id']; ?>"
+                          data-target="#modal<?= $key['id_produk']; ?>"
                         >
                           Hapus
                         </button>
 
-                        <div class="modal fade" id="modal<?= $key['id']; ?>">
+                        <div class="modal fade" id="modal<?= $key['id_produk']; ?>">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -51,7 +53,7 @@
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="<?= base_url(); ?>admin/produk/hapus/<?= $key['id']; ?>" method="post">
+                              <form action="<?= base_url(); ?>admin/produk/hapus/<?= $key['id_produk']; ?>" method="post">
                                 <div class="modal-body">
                                   Anda yakin akan menghapus data produk <b><?= $key['nama_produk']; ?></b>
                                 </div>

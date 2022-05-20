@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class LoginController extends CI_Controller {
+
   public function __construct()
   {
     parent::__construct();
@@ -36,5 +37,9 @@ class LoginController extends CI_Controller {
     $this->session->sess_destroy();
     $this->session->set_flashdata('success', 'Anda berhasil logout');
     redirect();
+  }
+
+  public function error404()
+  {$this->load->view('404');
   }
 }

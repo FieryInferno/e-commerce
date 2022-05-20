@@ -9,7 +9,7 @@
         <div class="card">
           <!-- /.card-header -->
           <!-- form start -->
-          <form action="<?= base_url(); ?>admin/produk/<?= $type === 'add' ? 'tambah' : 'edit/' . $id; ?>" method="post" enctype="multipart/form-data">
+          <form action="<?= base_url(); ?>admin/produk/<?= $type === 'add' ? 'tambah' : 'edit/' . $id_produk; ?>" method="post" enctype="multipart/form-data">
             <div class="card-body">
               <div class="form-group">
                 <label for="namaProduk">Nama Produk</label>
@@ -41,9 +41,9 @@
                 <select class="form-control select2" style="width: 100%;" name="kategori_id">
                   <option></option>
                   <?php
-                    foreach ($kategori as $key) {
-                      echo '<option value="' . $key['id'] . '">'. $key['nama_kategori'] . '</option>';
-                    }
+                    foreach ($kategori as $key) { ?>
+                      <option value="<?= $key['id_kategori']; ?>" <?= $kategori_id === $key['id_kategori'] ? 'selected' : ''; ?>><?= $key['nama_kategori']; ?></option>
+                    <?php }
                   ?>
                 </select>
               </div>
@@ -63,7 +63,7 @@
                 </div>
               </div>
               <div class="text-center">
-                <img class="img-thumbnail img-preview" id="anggota-img" width="40%">
+                <img class="img-thumbnail img-preview" id="anggota-img" width="40%" src="<?= $type === 'edit' ? base_url() . 'assets/image/' . $image : ''; ?>">
               </div>
             </div>
             <!-- /.card-body -->
