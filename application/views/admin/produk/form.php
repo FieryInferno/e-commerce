@@ -42,7 +42,13 @@
                   <option></option>
                   <?php
                     foreach ($kategori as $key) { ?>
-                      <option value="<?= $key['id_kategori']; ?>" <?= $kategori_id === $key['id_kategori'] ? 'selected' : ''; ?>><?= $key['nama_kategori']; ?></option>
+                      <option value="<?= $key['id_kategori']; ?>" 
+                        <?=
+                          $type === 'edit' ?
+                            $kategori_id === $key['id_kategori'] ?
+                              'selected' :
+                              '' :
+                            ''; ?>><?= $key['nama_kategori']; ?></option>
                     <?php }
                   ?>
                 </select>
