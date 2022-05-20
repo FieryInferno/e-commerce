@@ -57,12 +57,12 @@
           <h6 class="m-0">Kategori</h6>
           <i class="fa fa-angle-down text-dark"></i>
         </a>
-        <nav class="collapse <?= $type === 'home' ? 'show' : ''; ?> navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="navbar-vertical" <?= $type === 'shop' ? 'style="width: calc(100% - 30px); z-index: 1;"' : ''; ?>>
+        <nav class="collapse <?= $type === 'home' ? 'show' : 'position-absolute'; ?> navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light" id="navbar-vertical" <?= $type === 'shop' ? 'style="width: calc(100% - 30px); z-index: 1;"' : ''; ?>>
           <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
             <?php
-              foreach ($kategori as $key) {
-                echo '<a href="" class="nav-item nav-link">' . $key['nama_kategori'] . '</a>';
-              }
+              foreach ($kategori as $key) { ?>
+                <a href="<?= base_url(); ?>shop?kategori=<?= $key['id_kategori']; ?>" class="nav-item nav-link"><?= $key['nama_kategori']; ?></a>
+              <?php }
             ?>
           </div>
         </nav>

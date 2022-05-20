@@ -8,9 +8,14 @@ class ProdukModel extends CI_Model {
     $this->db->insert('produk', $data);
 	}
 
-  public function getAll()
+  public function getAll($id_kategori)
   {
     $this->db->join('kategori', 'produk.kategori_id = kategori.id_kategori');
+
+    if ($id_kategori) {
+      $this->db->where('produk.kategori_id', $id_kategori);
+    }
+    
     return $this->db->get('produk')->result_array();
   }
 

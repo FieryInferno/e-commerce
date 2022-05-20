@@ -14,9 +14,11 @@ class Welcome extends CI_Controller {
 
   public function shop()
   {
+    $kategori = $this->input->get('kategori');
+
 		$this->load->view('shop', [
       'kategori'  => $this->KategoriModel->getAll(),
-      'produk'    => $this->ProdukModel->getAll(),
+      'produk'    => $this->ProdukModel->getAll($kategori),
       'type'      => 'shop',
     ]); 
   }
