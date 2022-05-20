@@ -8,17 +8,35 @@ class ProdukModel extends CI_Model {
     $this->db->insert('produk', $data);
 	}
 
-  public function getAll($id_kategori = null, $sortBy = null)
+  public function getAll($id_kategori = null, $sortBy = null, $nama_produk = null, $filterByPrice = null)
   {
     $this->db->join('kategori', 'produk.kategori_id = kategori.id_kategori');
 
-    if ($id_kategori) {
-      $this->db->where('produk.kategori_id', $id_kategori);
+    if ($id_kategori) $this->db->where('produk.kategori_id', $id_kategori);
+    if ($sortBy) $this->db->order_by('created_at', 'desc');
+    if ($nama_produk) $this->db->like('nama_produk', $nama_produk);
+    if ($filterByPrice && $filterByPrice !== 'all') {
+      switch ($filterByPrice) {
+        case '0-100':
+          $this->db->where('harga >=', 0);
+          $this->db->where('harga <=', 100000);
+          break;
+        case '100-200':
+          $this->db->where('harga >=', 100000);
+          $this->db->where('harga <=', 200000);
+          break;
+        case '200-300':
+          $this->db->where('harga >=', 200000);
+          $this->db->where('harga <=', 300000);
+          break;
+        case '400-500':
+          $this->db->where('harga >=', 400000);
+          $this->db->where('harga <=', 500000);
+          break;
+      }
     }
-
-    if ($sortBy) {
-      $this->db->order_by('created_at', 'desc');
-    }
+    // $this->db->where('harga >=', 200000);
+    // $this->db->where('harga <=', 300000);
 
     return $this->db->get('produk')->result_array();
   }

@@ -87,20 +87,17 @@
   <script src="<?= base_url(); ?>assets/eshopper/js/main.js"></script>
   <script>
     const addOrUpdateUrlParam = (name, value) => {
-      var href = window.location.href;
-      var regex = new RegExp("[&\\?]" + name + "=");
-      if(regex.test(href))
-      {
-        regex = new RegExp("([&\\?])" + name + "=\\d+");
-        window.location.href = href.replace(regex, "$1" + name + "=" + value);
-      }
-      else
-      {
-        if(href.indexOf("?") > -1)
-          window.location.href = href + "&" + name + "=" + value;
-        else
-          window.location.href = href + "?" + name + "=" + value;
-      }
+      let queryParams = new URLSearchParams(window.location.search);
+      
+      queryParams.set(name, value);
+      history.pushState(null, null, "?"+queryParams.toString());
+      window.location.search = queryParams.toString();
+    }
+
+    const searchByNameProduct = () => {
+      const name = $('#nama_produk').val();
+
+      addOrUpdateUrlParam('nama_produk', name);
     }
   </script>
 </body>

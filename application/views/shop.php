@@ -21,34 +21,34 @@
         <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
         <form>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" checked id="price-all">
+            <input type="checkbox" class="custom-control-input" <?= $filterByPrice === 'all' ? 'checked' : ''; ?> id="price-all" onchange="addOrUpdateUrlParam('filterByPrice', 'all')">
             <label class="custom-control-label" for="price-all">All Price</label>
-            <span class="badge border font-weight-normal">1000</span>
+            <span class="badge border font-weight-normal"><?= count($all); ?></span>
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-1">
-            <label class="custom-control-label" for="price-1">$0 - $100</label>
-            <span class="badge border font-weight-normal">150</span>
+            <input type="checkbox" class="custom-control-input"  <?= $filterByPrice === '0-100' ? 'checked' : ''; ?> id="price-1" onchange="addOrUpdateUrlParam('filterByPrice', '0-100')">
+            <label class="custom-control-label" for="price-1">Rp. 0 - Rp. 100k</label>
+            <span class="badge border font-weight-normal"><?= count($seratus); ?></span>
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-2">
-            <label class="custom-control-label" for="price-2">$100 - $200</label>
-            <span class="badge border font-weight-normal">295</span>
+            <input type="checkbox" class="custom-control-input"  <?= $filterByPrice === '100-200' ? 'checked' : ''; ?> id="price-2" onchange="addOrUpdateUrlParam('filterByPrice', '100-200')">
+            <label class="custom-control-label" for="price-2">Rp. 100k - Rp. 200k</label>
+            <span class="badge border font-weight-normal"><?= count($duaratus); ?></span>
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-3">
-            <label class="custom-control-label" for="price-3">$200 - $300</label>
-            <span class="badge border font-weight-normal">246</span>
+            <input type="checkbox" class="custom-control-input"  <?= $filterByPrice === '200-300' ? 'checked' : ''; ?> id="price-3" onchange="addOrUpdateUrlParam('filterByPrice', '200-300')">
+            <label class="custom-control-label" for="price-3">Rp. 200k - Rp. 300k</label>
+            <span class="badge border font-weight-normal"><?= count($tigaratus); ?></span>
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-4">
-            <label class="custom-control-label" for="price-4">$300 - $400</label>
-            <span class="badge border font-weight-normal">145</span>
+            <input type="checkbox" class="custom-control-input"  <?= $filterByPrice === '300-400' ? 'checked' : ''; ?> id="price-4" onchange="addOrUpdateUrlParam('filterByPrice', '300-400')">
+            <label class="custom-control-label" for="price-4">Rp. 300k - Rp. 400k</label>
+            <span class="badge border font-weight-normal"><?= count($empatratus); ?></span>
           </div>
           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-            <input type="checkbox" class="custom-control-input" id="price-5">
-            <label class="custom-control-label" for="price-5">$400 - $500</label>
-            <span class="badge border font-weight-normal">168</span>
+            <input type="checkbox" class="custom-control-input"  <?= $filterByPrice === '400-500' ? 'checked' : ''; ?> id="price-5" onchange="addOrUpdateUrlParam('filterByPrice', '400-500')">
+            <label class="custom-control-label" for="price-5">Rp. 400k - Rp. 500k</label>
+            <span class="badge border font-weight-normal"><?= count($limaratus); ?></span>
           </div>
         </form>
       </div>
@@ -138,16 +138,14 @@
       <div class="row pb-3">
         <div class="col-12 pb-1">
           <div class="d-flex align-items-center justify-content-between mb-4">
-            <form action="">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search by name">
-                <div class="input-group-append">
-                  <span class="input-group-text bg-transparent text-primary">
-                    <i class="fa fa-search"></i>
-                  </span>
-                </div>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search by name" id="nama_produk">
+              <div class="input-group-append" onclick="searchByNameProduct()">
+                <span class="input-group-text bg-transparent text-primary">
+                  <i class="fa fa-search"></i>
+                </span>
               </div>
-            </form>
+            </div>
             <div class="dropdown ml-4">
               <button
                 class="btn border dropdown-toggle"
