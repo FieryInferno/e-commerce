@@ -20,6 +20,7 @@
                 <th>Diskon</th>
                 <th>Kategori</th>
                 <th>Warna</th>
+                <th>Ukuran</th>
                 <th>Aksi</th>
               </tr>
               </thead>
@@ -31,13 +32,22 @@
                       <td><?= $no++; ?></td>
                       <td><img src="<?= base_url(); ?>assets/image/<?= $key['image']; ?>" width="100%"></td>
                       <td><?= $key['nama_produk']; ?></td>
-                      <td><?= $key['harga']; ?></td>
+                      <td><?= formatRupiah($key['harga']); ?></td>
                       <td><?= $key['diskon']; ?></td>
                       <td><?= $key['nama_kategori']; ?></td>
                       <td>
                         <?php
                           foreach ($key['warna'] as $value) { ?>
                             - <?= ucfirst($value['warna']); ?><br/>
+                          <?php }
+                        ?>
+                      </td>
+                      <td>
+                        <?php
+                          foreach ($key['ukuran'] as $value) { ?>
+                            <span class="badge badge-info">
+                              <?= strtoupper($value['ukuran']); ?><br/>
+                            </span>
                           <?php }
                         ?>
                       </td>
