@@ -46,32 +46,41 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block"><?= $this->session->admin['username']; ?></a>
+          <a href="#" class="d-block"><?= $this->session->admin ? $this->session->admin['username'] : $this->session->user['username']; ?></a>
         </div>
       </div>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="<?= base_url(); ?>admin" class="nav-link <?= $active === 'dashboard' ? 'active' : ''; ?>">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url(); ?>admin/kategori" class="nav-link <?= $active === 'kategori' ? 'active' : ''; ?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>Kategori</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url(); ?>admin/produk" class="nav-link <?= $active === 'produk' ? 'active' : ''; ?>">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>Produk</p>
-            </a>
-          </li>
+          <?php
+            if ($this->session->admin) { ?>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>admin" class="nav-link <?= $active === 'dashboard' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>admin/kategori" class="nav-link <?= $active === 'kategori' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Kategori</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>admin/produk" class="nav-link <?= $active === 'produk' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Produk</p>
+                </a>
+              </li>
+            <?php } else { ?>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>user" class="nav-link <?= $active === 'dashboard' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+            <?php }
+          ?>
           <li class="nav-item">
             <a
               type="button"

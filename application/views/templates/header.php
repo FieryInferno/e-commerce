@@ -81,7 +81,7 @@
               <a href="<?= base_url(); ?>shop" class="nav-item nav-link <?= $type === 'shop' ? 'active' : ''; ?>">Shop</a>
             </div>
             <div class="navbar-nav ml-auto py-0">
-              <a href="" class="nav-item nav-link">Login</a>
+              <a href="<?= base_url(); ?>login" class="nav-item nav-link">Login</a>
               <a href="<?= base_url(); ?>register" class="nav-item nav-link">Register</a>
             </div>
           </div>

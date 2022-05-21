@@ -23,4 +23,15 @@
       }
     }
   }
+
+  if ( ! function_exists('isUser'))
+  {
+    function isUser(){
+      $CI =& get_instance();
+      
+      if (!$CI->session->user) {
+        redirect('404_override');
+      }
+    }
+  }
 ?>
