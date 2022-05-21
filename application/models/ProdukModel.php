@@ -42,7 +42,17 @@ class ProdukModel extends CI_Model {
       }
     }
 
-    return $this->db->get('produk')->result_array();
+    return $this->getWarna($this->db->get('produk')->result_array());
+  }
+
+  protected function getWarna($produk)
+  {
+    for ($i=0; $i < count($produk); $i++) {
+      $key                  = $produk[$i];
+      $produk[$i]['warna']  = $this->db->get_where('warna_produk', ['produk_id' => $key['id_produk']])->result_array();
+    }
+
+    return $produk;
   }
 
   public function update($id, $data)

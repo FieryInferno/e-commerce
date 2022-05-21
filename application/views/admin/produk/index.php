@@ -19,6 +19,7 @@
                 <th>Harga</th>
                 <th>Diskon</th>
                 <th>Kategori</th>
+                <th>Warna</th>
                 <th>Aksi</th>
               </tr>
               </thead>
@@ -33,6 +34,13 @@
                       <td><?= $key['harga']; ?></td>
                       <td><?= $key['diskon']; ?></td>
                       <td><?= $key['nama_kategori']; ?></td>
+                      <td>
+                        <?php
+                          foreach ($key['warna'] as $value) { ?>
+                            - <?= ucfirst($value['warna']); ?><br/>
+                          <?php }
+                        ?>
+                      </td>
                       <td>
                         <a href="<?= base_url(); ?>admin/produk/edit/<?= $key['id_produk']; ?>" class="btn btn-primary">Edit</a>
                         <button
