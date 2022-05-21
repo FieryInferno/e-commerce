@@ -40,6 +40,7 @@ class ProdukModel extends CI_Model {
     $nama_produk    = null,
     $filterByPrice  = null,
     $filterByColor  = null,
+    $filterBySize   = null,
   ) {
     $this->db->join('kategori', 'produk.kategori_id = kategori.id_kategori');
 
@@ -69,6 +70,10 @@ class ProdukModel extends CI_Model {
     if ($filterByColor && $filterByColor !== 'all') {
       $this->db->join('warna_produk', 'produk.id_produk = warna_produk.produk_id');
       $this->db->where('warna_produk.warna', $filterByColor);
+    }
+    if ($filterBySize && $filterBySize !== 'all') {
+      $this->db->join('ukuran_produk', 'produk.id_produk = ukuran_produk.produk_id');
+      $this->db->where('ukuran_produk.ukuran', $filterBySize);
     }
 
     return $this->getWarnaAndUkuran($this->db->get('produk')->result_array());
