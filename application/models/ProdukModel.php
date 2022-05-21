@@ -79,6 +79,68 @@ class ProdukModel extends CI_Model {
     return $this->getWarnaAndUkuran($this->db->get('produk')->result_array());
   }
 
+  public function getAllWithPagination(
+    $id_kategori    = null,
+    $sortBy         = null,
+    $nama_produk    = null,
+    $filterByPrice  = null,
+    $filterByColor  = null,
+    $filterBySize   = null,
+    $pagination     = FALSE,
+  ) {
+    $config['base_url'] = base_url() . 'shop';
+    $config['per_page'] = 9;
+    $from               = $this->uri->segment(2);
+    $data               = $this->getAll(
+      $id_kategori,
+      $sortBy,
+      $nama_produk,
+      $filterByPrice,
+      $filterByColor,
+      $filterBySize,
+    );
+
+    $config['total_rows']       = count($data);
+    $config['first_link']       = 'First';
+    $config['last_link']        = 'Last';
+    $config['next_link']        = 'Next';
+    $config['prev_link']        = 'Prev';
+    $config['full_tag_open']    = '
+      <div class="col-12 pb-1">
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center mb-3">';
+    $config['full_tag_close']   = '
+          </ul>
+        </nav>
+      </div>';
+    $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+    $config['num_tag_close']    = '</span></li>';
+    $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+    $config['cur_tag_close']    = '</span></li>';
+    $config['next_tag_open']    = '<li class="page-item">
+    <span class="page-link" aria-label="Next">';
+    $config['next_tagl_close']  = '
+    <span aria-hidden="true">&raquo;</span>
+    <span class="sr-only">Next</span>
+  </span>
+</li>';
+    $config['prev_tag_open']    = '
+    <li class="page-item">
+      <span class="page-link" href="#" aria-label="Previous">';
+    $config['prev_tagl_close']  = '
+    <span aria-hidden="true">&laquo;</span>
+    <span class="sr-only">Previous</span>
+  </span>
+</li>';
+    $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+    $config['first_tagl_close'] = '</span></li>';
+    $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+    $config['last_tagl_close']  = '</span></li>';
+    $config['reuse_query_string'] = TRUE;
+    $this->pagination->initialize($config);
+    return array_slice($data, $from, $config['per_page']);
+  }
+
   protected function getWarnaAndUkuran($produk)
   {
     if(array_keys($produk) !== range(0, count($produk) - 1)) {

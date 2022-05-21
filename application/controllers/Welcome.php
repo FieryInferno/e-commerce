@@ -22,7 +22,7 @@ class Welcome extends CI_Controller {
     $filterBySize   = $this->input->get('filterBySize');
     $data           = [
       'kategori'      => $this->KategoriModel->getAll(),
-      'produk'        => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, $filterByPrice, $filterByColor, $filterBySize),
+      'produk'        => $this->ProdukModel->getAllWithPagination($kategori, $sortBy, $nama_produk, $filterByPrice, $filterByColor, $filterBySize),
       'type'          => 'shop',
       'filterByPrice' => $filterByPrice,
       'filterByColor' => $filterByColor,
