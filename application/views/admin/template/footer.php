@@ -45,7 +45,11 @@
 <?php $this->load->view('admin/template/script'); ?>
 <script>
   $(function () {
-    $("#example1").DataTable()
+    $("#example1").DataTable({
+      responsive: true,
+      scrollX: true,
+    });
+    $('#summernote').summernote();
     $('.select2').select2({
       placeholder: "Masukan",
       allowClear: true

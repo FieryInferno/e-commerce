@@ -36,6 +36,7 @@ class ProdukController extends CI_Controller {
       'harga'       => $this->input->post('harga'),
       'diskon'      => $this->input->post('diskon'),
       'kategori_id' => $this->input->post('kategori_id'),
+      'deskripsi'   => $this->input->post('deskripsi'),
     ];
 
     $config ['upload_path']	  = './assets/image/';
@@ -100,4 +101,13 @@ class ProdukController extends CI_Controller {
     $this->session->set_flashdata('success', 'Berhasil hapus produk');
     redirect('/admin/produk');
 	}
+
+  public function show($id_produk)
+  {
+    $data           = $this->ProdukModel->getById($id_produk);
+    $data['active'] = 'produk';
+    $data['title']  = 'Detail Produk';
+
+    $this->load->view('admin/produk/detail', $data);
+  }
 }

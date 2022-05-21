@@ -52,10 +52,11 @@
                         ?>
                       </td>
                       <td>
-                        <a href="<?= base_url(); ?>admin/produk/edit/<?= $key['id_produk']; ?>" class="btn btn-primary">Edit</a>
+                        <a href="<?= base_url(); ?>admin/produk/detail/<?= $key['id_produk']; ?>" class="btn btn-sm btn-success">Detail</a>
+                        <a href="<?= base_url(); ?>admin/produk/edit/<?= $key['id_produk']; ?>" class="btn btn-sm btn-primary">Edit</a>
                         <button
                           type="button"
-                          class="btn btn-danger"
+                          class="btn btn-sm btn-danger"
                           data-toggle="modal"
                           data-target="#modal<?= $key['id_produk']; ?>"
                         >

@@ -61,7 +61,9 @@
                 <?php }
               ?>
             </div>
-            <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit clita ea. Sanc invidunt ipsum et, labore clita lorem magna lorem ut. Erat lorem duo dolor no sea nonumy. Accus labore stet, est lorem sit diam sea et justo, amet at lorem et eirmod ipsum diam et rebum kasd rebum.</p>
+            <p class="mb-4">
+              <?= $deskripsi; ?>
+            </p>
             <div class="d-flex mb-3">
                 <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
                 <form>
