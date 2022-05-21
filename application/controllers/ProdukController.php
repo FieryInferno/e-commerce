@@ -50,7 +50,7 @@ class ProdukController extends CI_Controller {
       $data['image'] = $this->upload->data('file_name');
     }
 
-    $this->ProdukModel->store($data, $this->input->post('warna'));
+    $this->ProdukModel->store($data, $this->input->post('warna'), $this->input->post('ukuran'));
     $this->session->set_flashdata('success', 'Berhasil tambah produk');
     redirect('/admin/produk');
 	}
@@ -89,7 +89,7 @@ class ProdukController extends CI_Controller {
       }
     }
 
-    $this->ProdukModel->update($id, $data, $this->input->post('warna'));
+    $this->ProdukModel->update($id, $data, $this->input->post('warna'), $this->input->post('ukuran'));
     $this->session->set_flashdata('success', 'Berhasil tambah produk');
     redirect('/admin/produk');
 	}

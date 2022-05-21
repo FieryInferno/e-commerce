@@ -57,17 +57,19 @@
                 <label>Warna</label>
                 <?php
                   $no = 0;
-                  foreach ($warna as $key) { ?>
-                    <div class="input-group" id="input-group<?= $no; ?>">
-                      <input type="text" class="form-control" placeholder="Warna" name="warna[]" value="<?= ucfirst($key['warna']); ?>">
-                      <div class="input-group-append" id="input-group-append<?= $no; ?>" onclick="hapusWarna(<?= $no; ?>)">
-                        <span class="input-group-text bg-danger text-primary">
-                          <i class="fa fa-trash"></i>
-                        </span>
+                  if ($type === 'edit') {
+                    foreach ($warna as $key) { ?>
+                      <div class="input-group" id="input-group<?= $no; ?>">
+                        <input type="text" class="form-control" placeholder="Warna" name="warna[]" value="<?= ucfirst($key['warna']); ?>">
+                        <div class="input-group-append" id="input-group-append<?= $no; ?>" onclick="hapusWarna(<?= $no; ?>)">
+                          <span class="input-group-text bg-danger text-primary">
+                            <i class="fa fa-trash"></i>
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <?php 
-                    $no++;
+                      <?php 
+                      $no++;
+                    }
                   }
                 ?>
                 <div class="input-group" id="input-group<?= $no; ?>">
@@ -77,6 +79,29 @@
                       <i class="fa fa-plus"></i>
                     </span>
                   </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Ukuran</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="xs">
+                  <label class="form-check-label">XS</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="s">
+                  <label class="form-check-label">S</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="m">
+                  <label class="form-check-label">M</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="l">
+                  <label class="form-check-label">L</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="xl">
+                  <label class="form-check-label">XL</label>
                 </div>
               </div>
               <div class="form-group">

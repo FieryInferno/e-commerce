@@ -3,19 +3,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProdukModel extends CI_Model {
   
-	public function store($data, $warna)
+	public function store($data, $warna, $ukuran)
 	{
     $this->db->insert('produk', $data);
-    $this->addWarna($warna);
+    $this->addWarna($warna, $data['id_produk']);
+    $this->addUkuran($ukuran, $data['id_produk']);
 	}
 
-  public function addWarna($warna)
+  public function addWarna($warna, $id_produk)
   {
     foreach ($warna as $key) {
       if ($key !== '') {
         $this->db->insert('warna_produk', [
-          'produk_id' => $data['id_produk'],
+          'produk_id' => $id_produk,
           'warna'     => strtolower($key),
+        ]);
+      }
+    }
+  }
+
+  public function addUkuran($ukuran, $id_produk)
+  {
+    foreach ($ukuran as $key) {
+      if ($key !== '') {
+        $this->db->insert('ukuran_produk', [
+          'produk_id' => $id_produk,
+          'ukuran'     => $key,
         ]);
       }
     }
@@ -82,6 +95,8 @@ class ProdukModel extends CI_Model {
     $this->db->where('id_produk', $id)->update('produk', $data);
     $this->db->where('produk_id', $id)->delete('warna_produk');
     $this->addWarna($warna);
+    $this->db->where('produk_id', $id)->delete('ukuran_produk');
+    $this->addUkuran($ukuran);
   }
 
   public function getById($id)
