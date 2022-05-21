@@ -74,6 +74,7 @@ class ProdukController extends CI_Controller {
       'harga'       => $this->input->post('harga'),
       'diskon'      => $this->input->post('diskon'),
       'kategori_id' => $this->input->post('kategori_id'),
+      'deskripsi'   => $this->input->post('deskripsi'),
     ];
 
     if ($_FILES['image']['name'] !== '') {
@@ -91,7 +92,7 @@ class ProdukController extends CI_Controller {
     }
 
     $this->ProdukModel->update($id, $data, $this->input->post('warna'), $this->input->post('ukuran'));
-    $this->session->set_flashdata('success', 'Berhasil tambah produk');
+    $this->session->set_flashdata('success', 'Berhasil edit produk');
     redirect('/admin/produk');
 	}
   

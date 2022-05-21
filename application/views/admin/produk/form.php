@@ -153,7 +153,9 @@
               </div>
               <div class="col-md-6">
                 <label for="namaProduk">Deskripsi</label>
-                <textarea id="summernote" name="deskripsi"></textarea>
+                <textarea id="summernote" name="deskripsi">
+                  <?= $type === 'edit' ? $deskripsi : ''; ?>
+                </textarea>
               </div>
             </div>
             <!-- /.card-body -->
