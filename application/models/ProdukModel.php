@@ -92,13 +92,13 @@ class ProdukModel extends CI_Model {
     return $produk;
   }
 
-  public function update($id, $data, $warna)
+  public function update($id, $data, $warna, $ukuran)
   {
     $this->db->where('id_produk', $id)->update('produk', $data);
     $this->db->where('produk_id', $id)->delete('warna_produk');
-    $this->addWarna($warna);
+    $this->addWarna($warna, $id);
     $this->db->where('produk_id', $id)->delete('ukuran_produk');
-    $this->addUkuran($ukuran);
+    $this->addUkuran($ukuran, $id);
   }
 
   public function getById($id)

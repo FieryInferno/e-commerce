@@ -84,23 +84,48 @@
               <div class="form-group">
                 <label>Ukuran</label>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="xs">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="ukuran[]"
+                    <?= in_array('xs', array_column($ukuran, 'ukuran')) ? 'checked' : ''; ?>
+                    value="xs">
                   <label class="form-check-label">XS</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="s">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="ukuran[]"
+                    <?= in_array('s', array_column($ukuran, 'ukuran')) ? 'checked' : ''; ?>
+                    value="s">
                   <label class="form-check-label">S</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="m">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="ukuran[]"
+                    <?= in_array('m', array_column($ukuran, 'ukuran')) ? 'checked' : ''; ?>
+                    value="m">
                   <label class="form-check-label">M</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="l">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="ukuran[]"
+                    <?= in_array('l', array_column($ukuran, 'ukuran')) ? 'checked' : ''; ?>
+                    value="l">
                   <label class="form-check-label">L</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="ukuran[]" value="xl">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="ukuran[]"
+                    <?= in_array('xl', array_column($ukuran, 'ukuran')) ? 'checked' : ''; ?>
+                    value="xl">
                   <label class="form-check-label">XL</label>
                 </div>
               </div>
