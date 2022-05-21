@@ -21,8 +21,13 @@ class ProdukModel extends CI_Model {
     }
   }
 
-  public function getAll($id_kategori = null, $sortBy = null, $nama_produk = null, $filterByPrice = null)
-  {
+  public function getAll(
+    $id_kategori    = null,
+    $sortBy         = null,
+    $nama_produk    = null,
+    $filterByPrice  = null,
+    $filterByColor  = null,
+  ) {
     $this->db->join('kategori', 'produk.kategori_id = kategori.id_kategori');
 
     if ($id_kategori) $this->db->where('produk.kategori_id', $id_kategori);
@@ -48,6 +53,10 @@ class ProdukModel extends CI_Model {
           break;
       }
     }
+    if ($filterByColor && $filterByColor !== 'all') {
+      $this->db->join('warna_produk', 'produk.id_produk = warna_produk.produk_id');
+      $this->db->where('warna_produk.warna', $filterByColor);
+    }
 
     return $this->getWarna($this->db->get('produk')->result_array());
   }
@@ -55,7 +64,9 @@ class ProdukModel extends CI_Model {
   protected function getWarna($produk)
   {
     if(array_keys($produk) !== range(0, count($produk) - 1)) {
-      $produk['warna']  = $this->db->get_where('warna_produk', ['produk_id' => $produk['id_produk']])->result_array();
+      if (count($produk) !== 0) {
+        $produk['warna']  = $this->db->get_where('warna_produk', ['produk_id' => $produk['id_produk']])->result_array();
+      }
     } else {
       for ($i=0; $i < count($produk); $i++) {
         $key                  = $produk[$i];
@@ -81,5 +92,11 @@ class ProdukModel extends CI_Model {
   public function destroy($id)
   {
     $this->db->delete('produk', ['id_produk' => $id]);
+  }
+
+  public function getAllWarna()
+  {
+    $this->db->group_by('warna');
+    return $this->db->get('warna_produk')->result_array();
   }
 }

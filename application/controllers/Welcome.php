@@ -18,18 +18,26 @@ class Welcome extends CI_Controller {
     $sortBy         = $this->input->get('sortBy');
     $nama_produk    = $this->input->get('nama_produk');
     $filterByPrice  = $this->input->get('filterByPrice');
-
-		$this->load->view('shop', [
+    $filterByColor  = $this->input->get('filterByColor');
+    $data           = [
       'kategori'      => $this->KategoriModel->getAll(),
-      'produk'        => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, $filterByPrice),
+      'produk'        => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, $filterByPrice, $filterByColor),
       'type'          => 'shop',
       'filterByPrice' => $filterByPrice,
-      'all'           => $this->ProdukModel->getAll($kategori, $nama_produk, null, 'all'),
-      'seratus'       => $this->ProdukModel->getAll($kategori, $nama_produk, null, '0-100'),
-      'duaratus'      => $this->ProdukModel->getAll($kategori, $nama_produk, null, '100-200'),
-      'tigaratus'     => $this->ProdukModel->getAll($kategori, $nama_produk, null, '200-300'),
-      'empatratus'    => $this->ProdukModel->getAll($kategori, $nama_produk, null, '300-400'),
-      'limaratus'     => $this->ProdukModel->getAll($kategori, $nama_produk, null, '400-500'),
-    ]); 
+      'filterByColor' => $filterByColor,
+      'all'           => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, 'all', $filterByColor),
+      'seratus'       => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '0-100', $filterByColor),
+      'duaratus'      => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '100-200', $filterByColor),
+      'tigaratus'     => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '200-300', $filterByColor),
+      'empatratus'    => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '300-400', $filterByColor),
+      'limaratus'     => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '400-500', $filterByColor),
+      'warna'         => $this->ProdukModel->getAllWarna(),
+    ];
+
+    foreach ($data['warna'] as $key) {
+      $data['jumlah_warna'][$key['warna']] = $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, $filterByPrice, $key['warna']);
+    }
+
+		$this->load->view('shop', $data); 
   }
 }
