@@ -31,6 +31,7 @@ class ProdukController extends CI_Controller {
 	public function store()
 	{
     $data = [
+      'id_produk'   => uniqid(),
       'nama_produk' => $this->input->post('nama_produk'),
       'harga'       => $this->input->post('harga'),
       'diskon'      => $this->input->post('diskon'),
@@ -49,7 +50,7 @@ class ProdukController extends CI_Controller {
       $data['image'] = $this->upload->data('file_name');
     }
 
-    $this->ProdukModel->store($data);
+    $this->ProdukModel->store($data, $this->input->post('warna'));
     $this->session->set_flashdata('success', 'Berhasil tambah produk');
     redirect('/admin/produk');
 	}

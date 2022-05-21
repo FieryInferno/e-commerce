@@ -3,9 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProdukModel extends CI_Model {
   
-	public function store($data)
+	public function store($data, $warna)
 	{
     $this->db->insert('produk', $data);
+    foreach ($warna as $key) {
+      $this->db->insert('warna_produk', [
+        'produk_id' => $data['id_produk'],
+        'warna'     => strtolower($key),
+      ]);
+    }
 	}
 
   public function getAll($id_kategori = null, $sortBy = null, $nama_produk = null, $filterByPrice = null)
@@ -35,8 +41,6 @@ class ProdukModel extends CI_Model {
           break;
       }
     }
-    // $this->db->where('harga >=', 200000);
-    // $this->db->where('harga <=', 300000);
 
     return $this->db->get('produk')->result_array();
   }

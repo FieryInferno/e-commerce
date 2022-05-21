@@ -83,6 +83,35 @@
       imgPreview.src = e.target.result;
     }
   }
+
+  const addWarna = (index) => {
+    $('#warna').append(
+      `
+        <div class="input-group" id="input-group${index + 1}">
+          <input type="text" class="form-control" placeholder="Warna" name="warna[]">
+          <div class="input-group-append" id="input-group-append${index + 1}" onclick="addWarna(${index + 1})">
+            <span class="input-group-text bg-success text-primary">
+              <i class="fa fa-plus"></i>
+            </span>
+          </div>
+        </div>
+      `
+    );
+
+    $(`#input-group-append${index}`).attr('onclick', `hapusWarna(${index})`);
+
+    $(`#input-group-append${index}`).html(
+      `
+        <span class="input-group-text bg-danger text-primary">
+          <i class="fa fa-trash"></i>
+        </span>
+      `
+    );
+  }
+
+  const hapusWarna = (index) => {
+    $(`#input-group${index}`).remove();
+  }
 </script>
 </body>
 </html>

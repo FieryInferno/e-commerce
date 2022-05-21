@@ -53,6 +53,17 @@
                   ?>
                 </select>
               </div>
+              <div id="warna">
+                <label>Warna</label>
+                <div class="input-group" id="input-group0">
+                  <input type="text" class="form-control" placeholder="Warna" name="warna[]">
+                  <div class="input-group-append" id="input-group-append0" onclick="addWarna(0)">
+                    <span class="input-group-text bg-success text-primary">
+                      <i class="fa fa-plus"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
               <div class="form-group">
                 <label for="image">Gambar</label>
                 <div class="input-group">
