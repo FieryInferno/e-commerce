@@ -4,10 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller']    = 'welcome';
 $route['404_override']          = 'LoginController/error404';
 $route['translate_uri_dashes']  = FALSE;
-$route['logout']['post']        = 'LoginController/logout';
-$route['shop']                  = 'Welcome/shop';
-$route['shop/(:num)']           = 'Welcome/shop';
-$route['shop/detail/(:any)']    = 'Welcome/show/$1';
+
+$route['login']['get']    = 'LoginController/user';
+$route['login']['post']   = 'LoginController/userAuth';
+$route['logout']['post']  = 'LoginController/logout';
+
+$route['register']['get']   = 'LoginController/register';
+$route['register']['post']  = 'LoginController/registerAction';
+
+$route['shop']                = 'Welcome/shop';
+$route['shop/(:num)']         = 'Welcome/shop';
+$route['shop/detail/(:any)']  = 'Welcome/show/$1';
 
 $route['admin']['get']        = 'AdminController';
 $route['admin/login']['get']  = 'LoginController';
