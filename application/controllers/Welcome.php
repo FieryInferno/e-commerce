@@ -42,4 +42,12 @@ class Welcome extends CI_Controller {
 
 		$this->load->view('shop', $data); 
   }
+
+  public function show($id_produk)
+  {
+    $data         = $this->ProdukModel->getById($id_produk);
+    $data['type'] = 'shop';
+    
+    $this->load->view('detailProduk', $data);
+  }
 }

@@ -215,25 +215,23 @@
                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                   <h6 class="text-truncate mb-3"><?= $key['nama_produk']; ?></h6>
                   <div class="d-flex justify-content-center">
-                  <?php
-                    if ($key['diskon']) { ?>
-                      <h6><?= formatRupiah((int) $key['harga'] - (int) $key['harga'] * (int) $key['diskon'] / 100); ?></h6><h6 class="text-muted ml-2"><del><?= formatRupiah((int) $key['harga']); ?></del></h6>
-                    <?php } else { ?>
-                      <h6><?= formatRupiah((int) $key['harga']); ?></h6>
-                    <?php }
-                  ?>
+                    <?php
+                      if ($key['diskon']) { ?>
+                        <h6><?= formatRupiah((int) $key['harga'] - (int) $key['harga'] * (int) $key['diskon'] / 100); ?></h6><h6 class="text-muted ml-2"><del><?= formatRupiah((int) $key['harga']); ?></del></h6>
+                      <?php } else { ?>
+                        <h6><?= formatRupiah((int) $key['harga']); ?></h6>
+                      <?php }
+                    ?>
                   </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">
-                  <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                  <a href="<?= base_url(); ?>shop/detail/<?= $key['id_produk']; ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
                   <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
                 </div>
               </div>
             </div>
           <?php }
-        ?>
-        
-        <?= $this->pagination->create_links(); ?>
+          echo $this->pagination->create_links(); ?>
       </div>
     </div>
     <!-- Shop Product End -->

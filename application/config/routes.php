@@ -7,6 +7,7 @@ $route['translate_uri_dashes']  = FALSE;
 $route['logout']['post']        = 'LoginController/logout';
 $route['shop']                  = 'Welcome/shop';
 $route['shop/(:num)']           = 'Welcome/shop';
+$route['shop/detail/(:any)']    = 'Welcome/show/$1';
 
 $route['admin']['get']        = 'AdminController';
 $route['admin/login']['get']  = 'LoginController';
