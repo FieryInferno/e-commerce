@@ -89,7 +89,7 @@ class ProdukController extends CI_Controller {
       }
     }
 
-    $this->ProdukModel->update($id, $data);
+    $this->ProdukModel->update($id, $data, $this->input->post('warna'));
     $this->session->set_flashdata('success', 'Berhasil tambah produk');
     redirect('/admin/produk');
 	}

@@ -55,9 +55,24 @@
               </div>
               <div id="warna">
                 <label>Warna</label>
-                <div class="input-group" id="input-group0">
+                <?php
+                  $no = 0;
+                  foreach ($warna as $key) { ?>
+                    <div class="input-group" id="input-group<?= $no; ?>">
+                      <input type="text" class="form-control" placeholder="Warna" name="warna[]" value="<?= ucfirst($key['warna']); ?>">
+                      <div class="input-group-append" id="input-group-append<?= $no; ?>" onclick="hapusWarna(<?= $no; ?>)">
+                        <span class="input-group-text bg-danger text-primary">
+                          <i class="fa fa-trash"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <?php 
+                    $no++;
+                  }
+                ?>
+                <div class="input-group" id="input-group<?= $no; ?>">
                   <input type="text" class="form-control" placeholder="Warna" name="warna[]">
-                  <div class="input-group-append" id="input-group-append0" onclick="addWarna(0)">
+                  <div class="input-group-append" id="input-group-append<?= $no; ?>" onclick="addWarna(<?= $no; ?>)">
                     <span class="input-group-text bg-success text-primary">
                       <i class="fa fa-plus"></i>
                     </span>
