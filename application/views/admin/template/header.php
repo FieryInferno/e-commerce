@@ -79,6 +79,12 @@
                   <p>Dashboard</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>shop" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Shop</p>
+                </a>
+              </li>
             <?php }
           ?>
           <li class="nav-item">

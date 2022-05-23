@@ -13,9 +13,12 @@ $route['logout']['post']  = 'LoginController/logout';
 $route['register']['get']   = 'LoginController/register';
 $route['register']['post']  = 'LoginController/registerAction';
 
-$route['shop']                = 'Welcome/shop';
-$route['shop/(:num)']         = 'Welcome/shop';
-$route['shop/detail/(:any)']  = 'Welcome/show/$1';
+$route['shop']                            = 'Welcome/shop';
+$route['shop/(:num)']                     = 'Welcome/shop';
+$route['shop/detail/(:any)']              = 'Welcome/show/$1';
+$route['shop/cart/(:any)']['get']         = 'Welcome/cart/$1';
+$route['shop/cart/(:any)']['post']        = 'Welcome/addCart/$1';
+$route['shop/cart/update/(:any)']['post'] = 'Welcome/updateCart/$1';
 
 $route['admin']['get']        = 'AdminController';
 $route['admin/login']['get']  = 'LoginController';

@@ -226,7 +226,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">
                   <a href="<?= base_url(); ?>shop/detail/<?= $key['id_produk']; ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                  <a class="btn btn-sm text-dark p-0" <?= !$this->session->user ? 'data-toggle="tooltip" data-placement="top" title="Anda belum login"' : 'href=""' ?>><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                  <a class="btn btn-sm text-dark p-0" <?= !$this->session->user ? 'data-toggle="tooltip" data-placement="top" title="Anda belum login"' : '' ?>><i class="fas fa-heart text-primary mr-1"></i>Add To Wishlist</a>
                 </div>
               </div>
             </div>

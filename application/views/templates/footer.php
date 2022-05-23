@@ -99,6 +99,20 @@
 
       addOrUpdateUrlParam('nama_produk', name);
     }
+
+    const updateCart = (id_keranjang, tipe) => {
+      const kuantitas = parseInt($('#kuantitas').val());
+
+      $.ajax({
+        url   : `<?= base_url(); ?>shop/cart/update/${id_keranjang}`,
+        type  : 'post',
+        data  : {kuantitas: tipe === 'tambah' ? kuantitas + 1 : kuantitas - 1}, 
+        success : (result) => {
+          $('#harga').html(result.harga);
+          $('.totalHarga').html(result.totalHarga);
+        }
+      });
+    }
   </script>
 </body>
 

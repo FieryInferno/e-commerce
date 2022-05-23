@@ -64,13 +64,13 @@
           <p class="mb-4">
             <?= $deskripsi; ?>
           </p>
-          <div class="d-flex mb-3">
-            <p class="text-dark font-weight-medium mb-0 mr-3">Ukuran:</p>
-            <form>
+          <form action="<?= base_url(); ?>shop/cart/<?= $id_produk; ?>" method="post">
+            <div class="d-flex mb-3">
+              <p class="text-dark font-weight-medium mb-0 mr-3">Ukuran:</p>
               <?php
                 if (in_array('xs', array_column($ukuran, 'ukuran'))) { ?>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="size-1" name="size">
+                    <input type="radio" class="custom-control-input" id="size-1" name="ukuran" value="xs">
                     <label class="custom-control-label" for="size-1">XS</label>
                   </div>
                 <?php }
@@ -78,7 +78,7 @@
               <?php
                 if (in_array('s', array_column($ukuran, 'ukuran'))) { ?>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="size-2" name="size">
+                    <input type="radio" class="custom-control-input" id="size-2" name="ukuran" value="s">
                     <label class="custom-control-label" for="size-2">S</label>
                   </div>
                 <?php }
@@ -86,7 +86,7 @@
               <?php
                 if (in_array('m', array_column($ukuran, 'ukuran'))) { ?>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="size-3" name="size">
+                    <input type="radio" class="custom-control-input" id="size-3" name="ukuran" value="m">
                     <label class="custom-control-label" for="size-3">M</label>
                   </div>
                 <?php }
@@ -94,7 +94,7 @@
               <?php
                 if (in_array('l', array_column($ukuran, 'ukuran'))) { ?>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="size-4" name="size">
+                    <input type="radio" class="custom-control-input" id="size-4" name="ukuran" value="l">
                     <label class="custom-control-label" for="size-4">L</label>
                   </div>
                 <?php }
@@ -102,42 +102,44 @@
               <?php
                 if (in_array('xl', array_column($ukuran, 'ukuran'))) { ?>
                   <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="size-5" name="size">
+                  <input type="radio" class="custom-control-input" id="size-5" name="ukuran" value="xl">
                   <label class="custom-control-label" for="size-5">XL</label>
                 </div>
                 <?php }
               ?>
-            </form>
-          </div>
-          <div class="d-flex mb-4">
-            <p class="text-dark font-weight-medium mb-0 mr-3">Warna:</p>
-            <form>
+            </div>
+            <div class="d-flex mb-4">
+              <p class="text-dark font-weight-medium mb-0 mr-3">Warna:</p>
               <?php
                 foreach ($warna as $key) { ?>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="color-1" name="color">
+                    <input type="radio" class="custom-control-input" id="color-1" name="warna" value="<?= $key['warna']; ?>">
                     <label class="custom-control-label" for="color-1"><?= ucfirst($key['warna']); ?></label>
                   </div>
                 <?php }
               ?>
-            </form>
-          </div>
-          <div class="d-flex align-items-center mb-4 pt-2">
-              <div class="input-group quantity mr-3" style="width: 130px;">
-                  <div class="input-group-btn">
-                      <button class="btn btn-primary btn-minus" >
-                      <i class="fa fa-minus"></i>
+            </div>
+            <?php
+              if ($this->session->user) { ?>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                  <div class="input-group quantity mr-3" style="width: 130px;">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-primary btn-minus">
+                        <i class="fa fa-minus"></i>
                       </button>
-                  </div>
-                  <input type="text" class="form-control bg-secondary text-center" value="1">
-                  <div class="input-group-btn">
-                      <button class="btn btn-primary btn-plus">
-                          <i class="fa fa-plus"></i>
+                    </div>
+                    <input type="text" class="form-control bg-secondary text-center" value="1" name="kuantitas">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-primary btn-plus">
+                        <i class="fa fa-plus"></i>
                       </button>
+                    </div>
                   </div>
-              </div>
-              <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
-          </div>
+                  <button type="submit" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                </div>
+              <?php }
+            ?>
+          </form>
       </div>
   </div>
   <!-- <div class="row px-xl-5">

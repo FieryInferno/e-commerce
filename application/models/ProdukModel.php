@@ -34,21 +34,14 @@ class ProdukModel extends CI_Model {
     }
   }
 
-  public function getAll(
-    $id_kategori    = null,
-    $sortBy         = null,
-    $nama_produk    = null,
-    $filterByPrice  = null,
-    $filterByColor  = null,
-    $filterBySize   = null,
-  ) {
+  public function getAll($filter) {
     $this->db->join('kategori', 'produk.kategori_id = kategori.id_kategori');
 
-    if ($id_kategori) $this->db->where('produk.kategori_id', $id_kategori);
-    if ($sortBy) $this->db->order_by('created_at', 'desc');
-    if ($nama_produk) $this->db->like('nama_produk', $nama_produk);
-    if ($filterByPrice && $filterByPrice !== 'all') {
-      switch ($filterByPrice) {
+    if (array_key_exists('kategori', $filter) && $filter['kategori']) $this->db->where('produk.kategori_id', $filter['kategori']);
+    if (array_key_exists('sortBy', $filter) && $filter['sortBy']) $this->db->order_by('created_at', 'desc');
+    if (array_key_exists('nama_produk', $filter) && $filter['nama_produk']) $this->db->like('nama_produk', $filter['nama_produk']);
+    if (array_key_exists('filterByPrice', $filter)  && $filter['filterByPrice'] && $filter['filterByPrice'] !== 'all') {
+      switch ($filter['filterByPrice']) {
         case '0-100':
           $this->db->where('harga >=', 0);
           $this->db->where('harga <=', 100000);
@@ -67,38 +60,24 @@ class ProdukModel extends CI_Model {
           break;
       }
     }
-    if ($filterByColor && $filterByColor !== 'all') {
+    if (array_key_exists('filterByColor', $filter)  && $filter['filterByColor'] && $filter['filterByColor'] !== 'all') {
       $this->db->join('warna_produk', 'produk.id_produk = warna_produk.produk_id');
-      $this->db->where('warna_produk.warna', $filterByColor);
+      $this->db->where('warna_produk.warna', $filter['filterByColor']);
     }
-    if ($filterBySize && $filterBySize !== 'all') {
+    if (array_key_exists('filterBySize', $filter)  && $filter['filterBySize'] && $filter['filterBySize'] !== 'all') {
       $this->db->join('ukuran_produk', 'produk.id_produk = ukuran_produk.produk_id');
-      $this->db->where('ukuran_produk.ukuran', $filterBySize);
+      $this->db->where('ukuran_produk.ukuran', $filter['filterBySize']);
     }
+    if (array_key_exists('limit', $filter) && $filter['limit']) $this->db->limit(12);
 
     return $this->getWarnaAndUkuran($this->db->get('produk')->result_array());
   }
 
-  public function getAllWithPagination(
-    $id_kategori    = null,
-    $sortBy         = null,
-    $nama_produk    = null,
-    $filterByPrice  = null,
-    $filterByColor  = null,
-    $filterBySize   = null,
-    $pagination     = FALSE,
-  ) {
+  public function getAllWithPagination($filter) {
     $config['base_url'] = base_url() . 'shop';
     $config['per_page'] = 9;
     $from               = $this->uri->segment(2);
-    $data               = $this->getAll(
-      $id_kategori,
-      $sortBy,
-      $nama_produk,
-      $filterByPrice,
-      $filterByColor,
-      $filterBySize,
-    );
+    $data               = $this->getAll($filter);
 
     $config['total_rows']       = count($data);
     $config['first_link']       = 'First';

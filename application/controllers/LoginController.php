@@ -16,7 +16,10 @@ class LoginController extends CI_Controller {
 
 	public function user()
 	{
-		$this->load->view('login', ['type' => 'login']);
+		$this->load->view('login', [
+      'kategori'  => $this->KategoriModel->getAll(),
+      'type'      => 'login'
+    ]);
 	}
 
   public function adminAuth()
@@ -69,7 +72,10 @@ class LoginController extends CI_Controller {
 
   public function register()
   {
-    $this->load->view('register', ['type' => 'register']);
+    $this->load->view('register', [
+      'kategori'  => $this->KategoriModel->getAll(),
+      'type'      => 'register',
+    ]);
   }
 
   public function registerAction()

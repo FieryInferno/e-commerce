@@ -40,7 +40,7 @@
           </div>
           <div>
             <button class="btn btn-primary py-2 px-4" type="submit">
-              Register
+              Login
             </button>
           </div>
         </form>

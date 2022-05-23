@@ -7,37 +7,38 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome', [
       'kategori'  => $this->KategoriModel->getAll(),
-      'produk'    => $this->ProdukModel->getAll(),
+      'produk'    => $this->ProdukModel->getAll(['limit' => 12]),
       'type'      => 'home',
     ]);
 	}
 
   public function shop()
   {
-    $kategori       = $this->input->get('kategori');
-    $sortBy         = $this->input->get('sortBy');
-    $nama_produk    = $this->input->get('nama_produk');
-    $filterByPrice  = $this->input->get('filterByPrice');
-    $filterByColor  = $this->input->get('filterByColor');
-    $filterBySize   = $this->input->get('filterBySize');
+    $filter['kategori']       = $this->input->get('kategori');
+    $filter['sortBy']         = $this->input->get('sortBy');
+    $filter['nama_produk']    = $this->input->get('nama_produk');
+    $filter['filterByPrice']  = $this->input->get('filterByPrice');
+    $filter['filterByColor']  = $this->input->get('filterByColor');
+    $filter['filterBySize']   = $this->input->get('filterBySize');
+    
     $data           = [
       'kategori'      => $this->KategoriModel->getAll(),
-      'produk'        => $this->ProdukModel->getAllWithPagination($kategori, $sortBy, $nama_produk, $filterByPrice, $filterByColor, $filterBySize),
+      'produk'        => $this->ProdukModel->getAllWithPagination($filter),
       'type'          => 'shop',
-      'filterByPrice' => $filterByPrice,
-      'filterByColor' => $filterByColor,
-      'filterBySize' => $filterBySize,
-      'all'           => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, 'all', $filterByColor, $filterBySize),
-      'seratus'       => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '0-100', $filterByColor, $filterBySize),
-      'duaratus'      => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '100-200', $filterByColor, $filterBySize),
-      'tigaratus'     => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '200-300', $filterByColor, $filterBySize),
-      'empatratus'    => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '300-400', $filterByColor, $filterBySize),
-      'limaratus'     => $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, '400-500', $filterByColor, $filterBySize),
+      'filterByPrice' => $filter['filterByPrice'],
+      'filterByColor' => $filter['filterByColor'],
+      'filterBySize'  => $filter['filterBySize'],
+      'all'           => $this->ProdukModel->getAll(array_merge($filter, ['filterByPrice' => 'all'])),
+      'seratus'       => $this->ProdukModel->getAll(array_merge($filter, ['filterByPrice' => '0-100'])),
+      'duaratus'      => $this->ProdukModel->getAll(array_merge($filter, ['filterByPrice' => '100-200'])),
+      'tigaratus'     => $this->ProdukModel->getAll(array_merge($filter, ['filterByPrice' => '200-300'])),
+      'empatratus'    => $this->ProdukModel->getAll(array_merge($filter, ['filterByPrice' => '300-400'])),
+      'limaratus'     => $this->ProdukModel->getAll(array_merge($filter, ['filterByPrice' => '400-500'])),
       'warna'         => $this->ProdukModel->getAllWarna(),
     ];
 
     foreach ($data['warna'] as $key) {
-      $data['jumlah_warna'][$key['warna']] = $this->ProdukModel->getAll($kategori, $sortBy, $nama_produk, $filterByPrice, $key['warna'], $filterBySize);
+      $data['jumlah_warna'][$key['warna']] = $this->ProdukModel->getAll(array_merge($filter, ['filterByColor' => $key['warna']]));
     }
 
 		$this->load->view('shop', $data); 
@@ -49,5 +50,41 @@ class Welcome extends CI_Controller {
     $data['type'] = 'shop';
     
     $this->load->view('detailProduk', $data);
+  }
+
+  public function cart($id_produk)
+  {
+    $this->load->view('cart', [
+      'type'      => 'cart',
+      'keranjang' => $this->KeranjangModel->getByUser($this->session->user['id_user']),
+    ]);
+  }
+
+  public function addCart($id_produk)
+  {
+    $this->KeranjangModel->store($id_produk, $this->input->post());
+    redirect('shop/cart/' . $id_produk);
+  }
+
+  public function updateCart($id_keranjang)
+  {
+    $data['kuantitas']  = $this->input->post('kuantitas');
+    $produk             = $this->KeranjangModel->getById($id_keranjang);
+
+    $this->KeranjangModel->updateCart($id_keranjang, $data);
+    
+    $keranjang  = $this->KeranjangModel->getByUser($this->session->user['id_user']);
+    $totalHarga = 0;
+
+    foreach ($keranjang as $key) {
+      $totalHarga += $key['harga'] * $key['kuantitas'];
+    }
+
+    $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode([
+          'harga'       => formatRupiah($data['kuantitas'] * $produk['harga']),
+          'totalHarga'  => formatRupiah($totalHarga),
+        ]));
   }
 }
