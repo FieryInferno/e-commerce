@@ -16,4 +16,13 @@ class AdminController extends CI_Controller {
       'active'  => 'dashboard',
     ]);
 	}
+
+  public function user()
+  {
+		$this->load->view('admin/user', [
+      'title'   => 'User',
+      'active'  => 'user',
+      'user'    => $this->AdminModel->getUser(),
+    ]); 
+  }
 }

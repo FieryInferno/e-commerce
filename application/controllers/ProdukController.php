@@ -14,7 +14,7 @@ class ProdukController extends CI_Controller {
 		$this->load->view('admin/produk/index', [
       'title'   => 'Produk',
       'active'  => 'produk',
-      'produk'  => $this->ProdukModel->getAll(),
+      'produk'  => $this->ProdukModel->getAll([]),
     ]);
 	}
   

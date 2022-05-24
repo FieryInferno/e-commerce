@@ -7,4 +7,9 @@ class AdminModel extends CI_Model {
 	{
     return $this->db->get_where('admin', ['username' => $this->input->post('username')])->row_array();
 	}
+
+  public function getUser()
+  {
+    return $this->db->get('user')->result_array();
+  }
 }

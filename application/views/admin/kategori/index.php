@@ -26,17 +26,17 @@
                       <td><?= $no++; ?></td>
                       <td><?= $key['nama_kategori']; ?></td>
                       <td>
-                        <a href="<?= base_url(); ?>admin/kategori/edit/<?= $key['id']; ?>" class="btn btn-primary">Edit</a>
+                        <a href="<?= base_url(); ?>admin/kategori/edit/<?= $key['id_kategori']; ?>" class="btn btn-primary">Edit</a>
                         <button
                           type="button"
                           class="btn btn-danger"
                           data-toggle="modal"
-                          data-target="#modal<?= $key['id']; ?>"
+                          data-target="#modal<?= $key['id_kategori']; ?>"
                         >
                           Hapus
                         </button>
 
-                        <div class="modal fade" id="modal<?= $key['id']; ?>">
+                        <div class="modal fade" id="modal<?= $key['id_kategori']; ?>">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -45,7 +45,7 @@
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
-                              <form action="<?= base_url(); ?>admin/kategori/hapus/<?= $key['id']; ?>" method="post">
+                              <form action="<?= base_url(); ?>admin/kategori/hapus/<?= $key['id_kategori']; ?>" method="post">
                                 <div class="modal-body">
                                   Anda yakin akan menghapus data kategori <b><?= $key['nama_kategori']; ?></b>
                                 </div>

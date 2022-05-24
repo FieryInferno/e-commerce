@@ -5,6 +5,7 @@ $route['default_controller']    = 'welcome';
 $route['404_override']          = 'LoginController/error404';
 $route['translate_uri_dashes']  = FALSE;
 $route['user']                  = 'UserController';
+$route['admin/user']['get']     = 'AdminController/user';
 
 $route['login']['get']    = 'LoginController/user';
 $route['login']['post']   = 'LoginController/userAuth';

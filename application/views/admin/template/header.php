@@ -72,6 +72,12 @@
                   <p>Produk</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>admin/user" class="nav-link <?= $active === 'user' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>User</p>
+                </a>
+              </li>
             <?php } else { ?>
               <li class="nav-item">
                 <a href="<?= base_url(); ?>user" class="nav-link <?= $active === 'dashboard' ? 'active' : ''; ?>">
