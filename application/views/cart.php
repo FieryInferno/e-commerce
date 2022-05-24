@@ -58,7 +58,7 @@
                   </div>
                 </td>
                 <td class="align-middle" id="harga"><?= formatRupiah($harga); ?></td>
-                <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                <td class="align-middle"><a href="<?= base_url(); ?>shop/cart/delete/<?= $key['id_keranjang']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
               </tr>
             <?php }
           ?>

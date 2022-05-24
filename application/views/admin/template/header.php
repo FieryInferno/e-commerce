@@ -85,6 +85,12 @@
                   <p>Shop</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>shop/cart" class="nav-link <?= $active === 'cart' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Keranjang</p>
+                </a>
+              </li>
             <?php }
           ?>
           <li class="nav-item">

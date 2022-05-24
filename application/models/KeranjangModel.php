@@ -27,4 +27,9 @@ class KeranjangModel extends CI_Model {
     $this->db->join('produk', 'keranjang.produk_id = produk.id_produk');
     return $this->db->get_where('keranjang', ['id_keranjang' => $id_keranjang])->row_array();
   }
+
+  public function destroyCart($id_keranjang)
+  {
+    $this->db->delete('keranjang', ['id_keranjang' => $id_keranjang]);
+  }
 }

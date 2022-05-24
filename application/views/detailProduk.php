@@ -113,8 +113,8 @@
               <?php
                 foreach ($warna as $key) { ?>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" class="custom-control-input" id="color-1" name="warna" value="<?= $key['warna']; ?>">
-                    <label class="custom-control-label" for="color-1"><?= ucfirst($key['warna']); ?></label>
+                    <input type="radio" class="custom-control-input" id="color-<?= $key['warna']; ?>" name="warna" value="<?= $key['warna']; ?>">
+                    <label class="custom-control-label" for="color-<?= $key['warna']; ?>"><?= ucfirst($key['warna']); ?></label>
                   </div>
                 <?php }
               ?>
