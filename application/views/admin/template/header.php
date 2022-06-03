@@ -97,6 +97,12 @@
                   <p>Keranjang</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>user/address" class="nav-link <?= $active === 'address' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Alamat</p>
+                </a>
+              </li>
             <?php }
           ?>
           <li class="nav-item">

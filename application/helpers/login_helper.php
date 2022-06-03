@@ -5,7 +5,8 @@
     function isLogin(){
       $CI =& get_instance();
 
-      if (!str_contains(current_url(), 'logout')) {
+      // if (!str_contains(current_url(), 'logout')) {
+      if (strpos(current_url(), 'logout') !== false) {
         if ($CI->session->admin) {
           redirect('admin');
         }
