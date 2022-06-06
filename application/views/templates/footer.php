@@ -85,6 +85,7 @@
 
   <!-- Template Javascript -->
   <script src="<?= base_url(); ?>assets/eshopper/js/main.js"></script>
+  <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-1gUtnXSu6YUOwNFg"></script>
   <script>
     const addOrUpdateUrlParam = (name, value) => {
       let queryParams = new URLSearchParams(window.location.search);
@@ -113,6 +114,54 @@
         }
       });
     }
+
+    $('#pay-button').click((event) => {
+      event.preventDefault();
+      $(this).attr("disabled", "disabled");
+      $.ajax({
+        url   : '<?= site_url(); ?>shop/token',
+        cache : false,
+        success: (token) => {
+          snap.pay(token, {
+            onSuccess: (result) => {
+              console.log(result);
+              $("#status").val('success');
+              $("#id_order").val(result.order_id);
+              // $("#payment-form").submit();
+            },
+            onPending: (result) => {
+              console.log(result);
+              $("#status").val('pending');
+              $("#id_order").val(result.order_id);
+              // $("#payment-form").submit();
+            },
+            onError: (result) => {
+              console.log(result.status_message);
+              // $("#payment-form").submit();
+            }
+          });
+        }
+      });
+    });
+
+    // {
+    //   "status_code":"201",
+    //   "status_message":"Transaksi sedang diproses","transaction_id":"f41ca0fd-d544-4ee9-a1b2-f5b85a302373",
+    //   "order_id":"1270640099",
+    //   "gross_amount":"94000.00",
+    //   "payment_type":"bank_transfer",
+    //   "transaction_time":"2022-06-04 08:36:38",
+    //   "transaction_status":"pending",
+    //   "va_numbers":[
+    //     {
+    //       "bank":"bri",
+    //       "va_number":"088783754935698040"
+    //     }
+    //   ],
+    //   "fraud_status":"accept",
+    //   "pdf_url":"https://app.sandbox.midtrans.com/snap/v1/transactions/775326e6-d17f-4033-9098-7b93f729bdba/pdf",
+    //   "finish_redirect_url":"http://example.com?order_id=1270640099&status_code=201&transaction_status=pending"
+    // }
   </script>
 </body>
 

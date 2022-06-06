@@ -1,6 +1,6 @@
 <?php $this->load->view('templates/header'); ?>
 <!-- Page Header Start -->
-<div class="container-fluid bg-secondary mb-5">
+<div class="container-fluid mb-5" style="background-color: #323233;">
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
         <h1 class="font-weight-semi-bold text-uppercase mb-3">Shopping Cart</h1>
         <div class="d-inline-flex">
@@ -17,53 +17,58 @@
 <div class="container-fluid pt-5">
   <div class="row px-xl-5">
     <div class="col-lg-8 table-responsive mb-5">
-      <table class="table table-bordered text-center mb-0">
-        <thead class="bg-secondary text-dark">
-          <tr>
-            <th>Nama Produk</th>
-            <th>Harga</th>
-            <th>Kuantitas</th>
-            <th>Total</th>
-            <th>Hapus</th>
-          </tr>
-        </thead>
-        <tbody class="align-middle">
-          <?php
-            $totalHarga = 0;
+      <form action="<?= base_url(); ?>shop/checkout" method="post" id="payment-form">
+        <input type="hidden" name="status" id="status">
+        <input type="hidden" name="id_order" id="id_order">
+        <table class="table table-bordered text-center mb-0">
+          <thead class="bg-secondary text-dark">
+            <tr>
+              <th>Nama Produk</th>
+              <th>Harga</th>
+              <th>Kuantitas</th>
+              <th>Total</th>
+              <th>Hapus</th>
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <?php
+              $totalHarga = 0;
 
-            foreach ($keranjang as $key) {
-              $harga      = $key['harga'] * $key['kuantitas'];
-              $totalHarga += $harga; ?>
-              <tr>
-                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"><?= $key['nama_produk']; ?></td>
-                <td class="align-middle"><?= formatRupiah($key['harga']); ?></td>
-                <td class="align-middle">
-                  <div class="input-group quantity mx-auto" style="width: 100px;">
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-primary btn-minus" onclick="updateCart('<?= $key['id_keranjang']; ?>', 'kurang')">
-                        <i class="fa fa-minus"></i>
-                      </button>
+              foreach ($keranjang as $key) {
+                $harga      = $key['harga'] * $key['kuantitas'];
+                $totalHarga += $harga; ?>
+                <input type="hidden" name="id_keranjang[]" value="<?= $key['id_keranjang']; ?>">
+                <tr>
+                  <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"><?= $key['nama_produk']; ?></td>
+                  <td class="align-middle"><?= formatRupiah($key['harga']); ?></td>
+                  <td class="align-middle">
+                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-primary btn-minus" onclick="updateCart('<?= $key['id_keranjang']; ?>', 'kurang')" type="button">
+                          <i class="fa fa-minus"></i>
+                        </button>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm bg-secondary text-center"
+                        value="<?= $key['kuantitas']; ?>"
+                        id="kuantitas"
+                      >
+                      <div class="input-group-btn">
+                        <button class="btn btn-sm btn-primary btn-plus" onclick="updateCart('<?= $key['id_keranjang']; ?>', 'tambah')" type="button">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                      </div>
                     </div>
-                    <input
-                      type="text"
-                      class="form-control form-control-sm bg-secondary text-center"
-                      value="<?= $key['kuantitas']; ?>"
-                      id="kuantitas"
-                    >
-                    <div class="input-group-btn">
-                      <button class="btn btn-sm btn-primary btn-plus" onclick="updateCart('<?= $key['id_keranjang']; ?>', 'tambah')">
-                        <i class="fa fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </td>
-                <td class="align-middle" id="harga"><?= formatRupiah($harga); ?></td>
-                <td class="align-middle"><a href="<?= base_url(); ?>shop/cart/delete/<?= $key['id_keranjang']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
-              </tr>
-            <?php }
-          ?>
-        </tbody>
-      </table>
+                  </td>
+                  <td class="align-middle" id="harga"><?= formatRupiah($harga); ?></td>
+                  <td class="align-middle"><a href="<?= base_url(); ?>shop/cart/delete/<?= $key['id_keranjang']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
+                </tr>
+              <?php }
+            ?>
+          </tbody>
+        </table>
+      </form>
     </div>
     <div class="col-lg-4">
       <!-- <form class="mb-5" action="">
@@ -74,8 +79,8 @@
           </div>
         </div>
       </form> -->
-      <div class="card border-secondary mb-5">
-        <div class="card-header bg-secondary border-0">
+      <div class="card border-secondary mb-5" style="background-color: #000000;">
+        <div class="card-header border-0">
           <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
         </div>
         <div class="card-body">
@@ -93,7 +98,7 @@
             <h5 class="font-weight-bold">Total</h5>
             <h5 class="font-weight-bold totalHarga"><?= formatRupiah($totalHarga); ?></h5>
           </div>
-          <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+          <button class="btn btn-block btn-primary my-3 py-3" id="pay-button">Proceed To Checkout</button>
         </div>
       </div>
     </div>

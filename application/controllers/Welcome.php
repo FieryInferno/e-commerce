@@ -1,7 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once 'vendor/autoload.php';
+
 class Welcome extends CI_Controller {
+  
+  public function __construct()
+  {
+    parent::__construct();
+    Midtrans\Config::$serverKey = 'SB-Mid-server-yQCDmfpPIBdQRiHPVDyUfXqp';
+    Midtrans\Config::$clientKey = 'SB-Mid-client-JPMWoXrThdHhiuv-';
+    Midtrans\Config::$isSanitized = true;
+    Midtrans\Config::$is3ds = true;
+  }
 
 	public function index()
 	{
@@ -49,7 +60,7 @@ class Welcome extends CI_Controller {
   {
     $data                     = $this->ProdukModel->getById($id_produk);
     $data['type']             = 'shop';
-    $data['jumlahKeranjang']  = count($this->KeranjangModel->getByUser($this->session->user['id_user']));
+    $data['jumlahKeranjang']  = $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0;
     
     $this->load->view('detailProduk', $data);
   }
@@ -57,8 +68,8 @@ class Welcome extends CI_Controller {
   public function cart()
   {
     $this->load->view('cart', [
-      'type'      => 'cart',
-      'keranjang' => $this->KeranjangModel->getByUser($this->session->user['id_user']),
+      'type'            => 'cart',
+      'keranjang'       => $this->KeranjangModel->getByUser($this->session->user['id_user']),
       'jumlahKeranjang' => $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0,
     ]);
   }
@@ -95,5 +106,78 @@ class Welcome extends CI_Controller {
   {
     $this->KeranjangModel->destroyCart($id_keranjang);
     redirect('shop/cart');
+  }
+
+  public function checkout()
+  {
+    $this->KeranjangModel->checkout($this->input->post());
+    redirect('order');
+  }
+
+  public function token()
+  {
+    $keranjang    = $this->KeranjangModel->getByUser($this->session->user['id_user']);
+    $item_details = [];
+    $grossAmount  = 0;
+
+    foreach ($keranjang as $key) {
+      array_push($item_details, [
+        'id'        => $key['id_keranjang'],
+        'price'     => $key['harga'],
+        'quantity'  => $key['kuantitas'],
+        'name'      => $key['nama_produk'],
+      ]);
+
+      $grossAmount += $key['harga'];
+    }
+
+    // Required
+    $transaction_details = array(
+      'order_id'      => rand(),
+      'gross_amount'  => $grossAmount, // no decimal allowed for creditcard
+    );
+    
+    // Optional
+    $customer_details = [
+      'first_name'  => $this->session->user['nama'],
+      'email'       => $this->session->user['email'],
+    ];
+    
+    // Optional, remove this to display all available payment methods
+    $enable_payments = [
+      // "credit_card",
+      "gopay",
+      "shopeepay",
+      "permata_va",
+      "bca_va",
+      "bni_va",
+      "bri_va",
+      "echannel",
+      "other_va",
+      "danamon_online",
+      "mandiri_clickpay",
+      "cimb_clicks",
+      "bca_klikbca",
+      "bca_klikpay",
+      "bri_epay",
+      "xl_tunai",
+      "indosat_dompetku",
+      "kioson",
+      "Indomaret",
+      "alfamart",
+      "akulaku",
+    ];
+    
+    // Fill transaction details
+    $transaction = array(
+      'enabled_payments'    => $enable_payments,
+      'transaction_details' => $transaction_details,
+      'customer_details'    => $customer_details,
+      'item_details'        => $item_details,
+    );
+    
+    $snap_token = Midtrans\Snap::getSnapToken($transaction);
+
+    echo $snap_token;
   }
 }

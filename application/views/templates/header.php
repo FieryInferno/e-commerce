@@ -84,6 +84,8 @@
             <div class="navbar-nav mr-auto py-0">
               <a href="<?= base_url(); ?>" class="nav-item nav-link <?= $type === 'home' ? 'active' : ''; ?>">Home</a>
               <a href="<?= base_url(); ?>shop" class="nav-item nav-link <?= $type === 'shop' ? 'active' : ''; ?>">Shop</a>
+              <a href="#" class="nav-item nav-link">Shopee</a>
+              <a href="#" class="nav-item nav-link">Instagram</a>
             </div>
             <?php
               if (!$this->session->user) { ?>

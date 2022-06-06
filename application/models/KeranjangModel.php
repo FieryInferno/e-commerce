@@ -32,4 +32,12 @@ class KeranjangModel extends CI_Model {
   {
     $this->db->delete('keranjang', ['id_keranjang' => $id_keranjang]);
   }
+
+  public function checkout($data)
+  {
+    $this->db->update('keranjang', [
+      'id_order'  => $data['id_order'],
+      'status'    => $data['status'],
+    ], ['id_keranjang'  => $data['id_keranjang']]);
+  }
 }
