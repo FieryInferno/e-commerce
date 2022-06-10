@@ -22,7 +22,7 @@
             <div class="carousel-item active">
               <img class="w-100 h-100" src="<?= base_url(); ?>assets/image/<?= $image; ?>" alt="Image">
             </div>
-            <!-- <div class="carousel-item">
+            <div class="carousel-item">
                 <img class="w-100 h-100" src="<?= base_url(); ?>assets/eshopper/img/product-2.jpg" alt="Image">
             </div>
             <div class="carousel-item">
@@ -30,14 +30,14 @@
             </div>
             <div class="carousel-item">
                 <img class="w-100 h-100" src="<?= base_url(); ?>assets/eshopper/img/product-4.jpg" alt="Image">
-            </div> -->
+            </div>
           </div>
-          <!-- <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+          <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
             <i class="fa fa-2x fa-angle-left text-dark"></i>
           </a>
           <a class="carousel-control-next" href="#product-carousel" data-slide="next">
             <i class="fa fa-2x fa-angle-right text-dark"></i>
-          </a> -->
+          </a>
         </div>
       </div>
 

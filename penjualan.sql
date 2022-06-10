@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2022 at 02:10 PM
+-- Generation Time: Jun 07, 2022 at 03:34 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -73,15 +73,18 @@ CREATE TABLE `keranjang` (
   `user_id` bigint(20) NOT NULL,
   `warna` varchar(191) NOT NULL,
   `ukuran` enum('xs','s','m','l','xl') NOT NULL,
-  `kuantitas` int(191) NOT NULL
+  `kuantitas` int(191) NOT NULL,
+  `id_order` varchar(191) DEFAULT NULL,
+  `status` enum('pending','success') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `keranjang`
 --
 
-INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`) VALUES
-(3, '1', 1, 'tosca', 'm', 2);
+INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `id_order`, `status`) VALUES
+(3, '1', 1, 'tosca', 'm', 2, NULL, NULL),
+(7, '1', 2, 'orange', 'm', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -166,7 +169,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `password`, `alamat`) VALUES
-(1, 'M. Bagas Setia', 'bagassetia271@gmail.com', 'bagassetia', '$2y$10$SqlCiatMj/y9mmC0rwyR0ue66dH7l0S/Ztw3g/sIMHDIDJo7JpVDy', '');
+(1, 'M. Bagas Setia', 'bagassetia271@gmail.com', 'bagassetia', '$2y$10$SqlCiatMj/y9mmC0rwyR0ue66dH7l0S/Ztw3g/sIMHDIDJo7JpVDy', ''),
+(2, 'devi', 'devi@gmail.com', 'devi', '$2y$10$W9WPzVVyuEN/9m9MYLvyxuL0/GMRdGhsLLd6tp7tSz1iuh/.9WUpm', '');
 
 -- --------------------------------------------------------
 
@@ -268,7 +272,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`
@@ -280,7 +284,7 @@ ALTER TABLE `ukuran_produk`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `warna_produk`
