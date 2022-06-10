@@ -140,14 +140,16 @@
                           class="custom-file-input"
                           id="image"
                           onchange="previewImg()"
-                          name="image"
+                          name="image[]"
+                          multiple
                         >
                         <label class="custom-file-label" for="image">Choose file</label>
                       </div>
                     </div>
                   </div>
                   <div class="text-center">
-                    <img class="img-thumbnail img-preview" id="anggota-img" width="40%" src="<?= $type === 'edit' ? base_url() . 'assets/image/' . $image : ''; ?>">
+                    <!-- <img class="img-thumbnail img-preview" id="anggota-img" width="40%" src="<?= $type === 'edit' ? base_url() . 'assets/image/' . $image : ''; ?>"> -->
+                    <div id="productImages"></div>
                   </div>
                 </div>
               </div>

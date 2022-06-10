@@ -8,7 +8,37 @@ class ProdukModel extends CI_Model {
     $this->db->insert('produk', $data);
     $this->addWarna($warna, $data['id_produk']);
     $this->addUkuran($ukuran, $data['id_produk']);
+    $this->addGambar($data['id_produk']);
 	}
+
+  public function addGambar($id_produk)
+  {
+    $count = count($_FILES['image']['name']);
+
+    for($i = 0;$i < $count;$i++){
+      if(!empty($_FILES['image']['name'][$i])){
+        $_FILES['file']['name']     = $_FILES['image']['name'][$i];
+        $_FILES['file']['type']     = $_FILES['image']['type'][$i];
+        $_FILES['file']['tmp_name'] = $_FILES['image']['tmp_name'][$i];
+        $_FILES['file']['error']    = $_FILES['image']['error'][$i];
+        $_FILES['file']['size']     = $_FILES['image']['size'][$i];
+        $config['upload_path']	    = './assets/image/';
+        $config['allowed_types']    = 'jpg|jpeg|png|gif';
+    
+        $this->upload->initialize($config);
+    
+        if (!$this->upload->do_upload('file')) {
+          $this->session->set_flashdata('message', $this->upload->display_errors());
+          redirect($_SERVER['HTTP_REFERER']);
+        }else {
+          $this->db->insert('gambar', [
+            'produk_id' => $id_produk,
+            'gambar'    => $this->upload->data('file_name'),
+          ]);
+        }
+      }
+    }
+  }
 
   public function addWarna($warna, $id_produk)
   {
@@ -126,12 +156,14 @@ class ProdukModel extends CI_Model {
       if (count($produk) !== 0) {
         $produk['warna']  = $this->db->get_where('warna_produk', ['produk_id' => $produk['id_produk']])->result_array();
         $produk['ukuran'] = $this->db->get_where('ukuran_produk', ['produk_id' => $produk['id_produk']])->result_array();
+        $produk['image']  = $this->db->get_where('gambar', ['produk_id' => $produk['id_produk']])->result_array();
       }
     } else {
       for ($i=0; $i < count($produk); $i++) {
         $key                  = $produk[$i];
         $produk[$i]['warna']  = $this->db->get_where('warna_produk', ['produk_id' => $key['id_produk']])->result_array();
         $produk[$i]['ukuran']  = $this->db->get_where('ukuran_produk', ['produk_id' => $key['id_produk']])->result_array();
+        $produk[$i]['image']  = $this->db->get_where('gambar', ['produk_id' => $key['id_produk']])->result_array();
       }
     }
 

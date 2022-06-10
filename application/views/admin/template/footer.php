@@ -79,13 +79,22 @@
 
   const previewImg = () => {
     const gambar      = document.querySelector('#image');
-    const imgPreview  = document.querySelector('.img-preview');
-    // label.textContent = gambar.files[0].name;
-    const file = new FileReader();
-    file.readAsDataURL(gambar.files[0]);
-    file.onload = function(e) {
-      imgPreview.src = e.target.result;
+    const reader = new FileReader();
+
+    const readFile = (index) => {
+      if( index >= gambar.files.length ) return;
+      const file = gambar.files[index];
+      reader.onload = function(e) {  
+        // get file content  
+        const bin = e.target.result;
+        
+        $('#productImages').append(`<img class="img-thumbnail img-preview" id="anggota-img" width="40%" src="${bin}">`);
+        readFile(index+1)
+      }
+      reader.readAsDataURL(file);
     }
+
+    readFile(0);
   }
 
   const addWarna = (index) => {

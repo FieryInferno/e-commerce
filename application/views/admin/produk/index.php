@@ -30,7 +30,43 @@
                   foreach ($produk as $key) { ?>
                     <tr>
                       <td><?= $no++; ?></td>
-                      <td><img src="<?= base_url(); ?>assets/image/<?= $key['image']; ?>" width="100%"></td>
+                      <td>
+                        <div
+                          id="carouselExampleFade<?= $key['id_produk']; ?>"
+                          class="carousel slide carousel-fade"
+                          data-ride="carousel"
+                          data-interval="false"
+                        >
+                          <div class="carousel-inner">
+                            <!-- <div class="carousel-item active">
+                              <img src="<?= base_url(); ?>assets/adminlte/dist/img/prod-1.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="<?= base_url(); ?>assets/adminlte/dist/img/prod-2.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="<?= base_url(); ?>assets/adminlte/dist/img/prod-3.jpg" class="d-block w-100" alt="...">
+                            </div> -->
+
+                            <?php
+                              for ($i=0; $i < count($key['image']); $i++) {
+                                $value = $key['image'][$i]; ?>
+                                <div class="carousel-item <?= $i === 0 ? 'active' : ''; ?>">
+                                  <img src="<?= base_url('assets/image/' . $value['gambar']); ?>" class="d-block w-100" alt="...">
+                                </div>
+                              <?php }
+                            ?>
+                          </div>
+                          <button class="carousel-control-prev" type="button" data-target="#carouselExampleFade<?= $key['id_produk']; ?>" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-target="#carouselExampleFade<?= $key['id_produk']; ?>" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                          </button>
+                        </div>
+                      </td>
                       <td><?= $key['nama_produk']; ?></td>
                       <td><?= formatRupiah($key['harga']); ?></td>
                       <td><?= $key['diskon']; ?></td>
