@@ -38,16 +38,6 @@
                           data-interval="false"
                         >
                           <div class="carousel-inner">
-                            <!-- <div class="carousel-item active">
-                              <img src="<?= base_url(); ?>assets/adminlte/dist/img/prod-1.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                              <img src="<?= base_url(); ?>assets/adminlte/dist/img/prod-2.jpg" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item">
-                              <img src="<?= base_url(); ?>assets/adminlte/dist/img/prod-3.jpg" class="d-block w-100" alt="...">
-                            </div> -->
-
                             <?php
                               for ($i=0; $i < count($key['image']); $i++) {
                                 $value = $key['image'][$i]; ?>
