@@ -148,8 +148,14 @@
                     </div>
                   </div>
                   <div class="text-center">
-                    <!-- <img class="img-thumbnail img-preview" id="anggota-img" width="40%" src="<?= $type === 'edit' ? base_url() . 'assets/image/' . $image : ''; ?>"> -->
-                    <div id="productImages"></div>
+                    <div id="productImages">
+                      <?php
+                        for ($i=0; $i < count($image); $i++) {
+                          $value = $image[$i]; ?>
+                          <img class="img-thumbnail img-preview" id="anggota-img" width="40%" src="<?= $type === 'edit' ? base_url() . 'assets/image/' . $value['gambar'] : ''; ?>">
+                        <?php }
+                      ?>
+                    </div>
                   </div>
                 </div>
               </div>

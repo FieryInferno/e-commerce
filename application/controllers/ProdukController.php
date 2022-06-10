@@ -11,10 +11,6 @@ class ProdukController extends CI_Controller {
   
 	public function index()
 	{
-    // $gambar = $this->ProdukModel->getAll([]);
-    // print_r($gambar[9]['image']);
-    // die();
-
 		$this->load->view('admin/produk/index', [
       'title'   => 'Produk',
       'active'  => 'produk',
@@ -68,20 +64,6 @@ class ProdukController extends CI_Controller {
       'kategori_id' => $this->input->post('kategori_id'),
       'deskripsi'   => $this->input->post('deskripsi'),
     ];
-
-    if ($_FILES['image']['name'] !== '') {
-      $config ['upload_path']	  = './assets/image/';
-      $config ['allowed_types'] = 'jpg|jpeg|png|gif';
-  
-      $this->upload->initialize($config);
-  
-      if (!$this->upload->do_upload('image')) {
-        $this->session->set_flashdata('message', $this->upload->display_errors());
-        redirect($_SERVER['HTTP_REFERER']);
-      }else {
-        $data['image'] = $this->upload->data('file_name');
-      }
-    }
 
     $this->ProdukModel->update($id, $data, $this->input->post('warna'), $this->input->post('ukuran'));
     $this->session->set_flashdata('success', 'Berhasil edit produk');
