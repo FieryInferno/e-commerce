@@ -13,10 +13,11 @@ class GambarController extends CI_Controller {
 	{
     $tables   = "gambar";
     $search   = ['id_gambar', 'gambar'];
+    $where    = ['produk_id' => $id_produk];
     $isWhere  = null;
     
     header('Content-Type: application/json');
-    echo $this->DatatablesModel->get_tables($tables,$search,$isWhere);
+    echo $this->DatatablesModel->get_tables_where($tables, $search, $where, $isWhere);
 	}
 
   public function destroy($id_gambar)

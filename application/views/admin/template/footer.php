@@ -50,7 +50,7 @@
     showConfirmButton: false,
     timer: 3000
   });
-  
+
   $(function () {
     $("#example1").DataTable({
       responsive: true,
@@ -84,69 +84,73 @@
     })
   });
 
-  const tabelGambar = $('#table-gambar').DataTable({
-    "processing": true,
-    "responsive":true,
-    "serverSide": true,
-    "ordering": true, // Set true agar bisa di sorting
-    "order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
-    "ajax": {
-      "url": "<?= base_url('gambar/' . $id_produk);?>",
-      "type": "POST"
-    },
-    "deferRender": true,
-    "columns": [
-      {
-        "data": 'id_gambar',
-        "sortable": false, 
-        render: function (data, type, row, meta) {
-          return meta.row + meta.settings._iDisplayStart + 1;
-        }  
-      },
-      {
-        "data": "gambar",
-        "render": ( data, type, row, meta ) => `<img src="<?= base_url('assets/image/'); ?>${data}" class="d-block w-100" alt="...">`,
-      },
-      {
-        "data": "id_gambar",
-        "render": ( data, type, row, meta ) => {
-          return `
-            <button
-              type="button"
-              class="btn btn-sm btn-danger"
-              data-toggle="modal"
-              data-target="#modal${data}"
-            >
-              Hapus
-            </button>
-
-            <div class="modal fade" id="modal${data}">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Konfirmasi Hapus</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+  <?php
+    if (!empty($id_produk)) { ?>
+      const tabelGambar = $('#table-gambar').DataTable({
+        "processing": true,
+        "responsive":true,
+        "serverSide": true,
+        "ordering": true, // Set true agar bisa di sorting
+        "order": [[ 0, 'asc' ]], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
+        "ajax": {
+          "url": "<?= base_url('gambar/' . $id_produk);?>",
+          "type": "POST"
+        },
+        "deferRender": true,
+        "columns": [
+          {
+            "data": 'id_gambar',
+            "sortable": false, 
+            render: function (data, type, row, meta) {
+              return meta.row + meta.settings._iDisplayStart + 1;
+            }  
+          },
+          {
+            "data": "gambar",
+            "render": ( data, type, row, meta ) => `<img src="<?= base_url('assets/image/'); ?>${data}" class="d-block w-100" alt="...">`,
+          },
+          {
+            "data": "id_gambar",
+            "render": ( data, type, row, meta ) => {
+              return `
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  data-toggle="modal"
+                  data-target="#modal${data}"
+                >
+                  Hapus
+                </button>
+    
+                <div class="modal fade" id="modal${data}">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Konfirmasi Hapus</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form>
+                        <div class="modal-body">
+                          Anda yakin akan menghapus gambar ini?
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <div class="btn btn-danger" onClick="hapusGambar('${data}')">Hapus</div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /.modal-content -->
                   </div>
-                  <form>
-                    <div class="modal-body">
-                      Anda yakin akan menghapus gambar ini?
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <div class="btn btn-danger" onClick="hapusGambar('${data}')">Hapus</div>
-                    </div>
-                  </form>
-                </div>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
-            </div>`;
-        }
-      },
-    ],
-  });
+                  <!-- /.modal-dialog -->
+                </div>`;
+            }
+          },
+        ],
+      });
+    <?php }
+  ?>
 
   const hapusGambar = (id_gambar) => {
     $.ajax({
