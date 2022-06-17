@@ -131,32 +131,30 @@
                       <label class="form-check-label">XL</label>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="image">Gambar</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input
-                          type="file"
-                          class="custom-file-input"
-                          id="image"
-                          onchange="previewImg()"
-                          name="image[]"
-                          multiple
-                        >
-                        <label class="custom-file-label" for="image">Choose file</label>
+                  <?php
+                    if ($type === 'add') { ?>
+                      <div class="form-group">
+                        <label for="image">Gambar</label>
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input
+                              type="file"
+                              class="custom-file-input"
+                              id="image"
+                              onchange="previewImg()"
+                              name="image[]"
+                              multiple
+                            >
+                            <label class="custom-file-label" for="image">Choose file</label>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="text-center">
-                    <div id="productImages">
-                      <?php
-                        for ($i=0; $i < count($image); $i++) {
-                          $value = $image[$i]; ?>
-                          <img class="img-thumbnail img-preview" id="anggota-img" width="40%" src="<?= $type === 'edit' ? base_url() . 'assets/image/' . $value['gambar'] : ''; ?>">
-                        <?php }
-                      ?>
-                    </div>
-                  </div>
+                      <div class="text-center">
+                        <div id="productImages">
+                        </div>
+                      </div>
+                    <?php }
+                  ?>
                 </div>
               </div>
               <div class="col-md-6">
@@ -164,6 +162,24 @@
                 <textarea id="summernote" name="deskripsi">
                   <?= $type === 'edit' ? $deskripsi : ''; ?>
                 </textarea>
+              </div>
+              <div class="col-md-12">
+                <div>
+                  <label for="namaProduk">Gambar Produk</label>
+                </div>
+                <a href="#" class="btn btn-success">Tambah</a>
+                <br/>
+                <br/>
+                <table id="table-gambar" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th width="10%">No</th>
+                    <th width="30%">Gambar</th>
+                    <th>Aksi</th>
+                  </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
               </div>
             </div>
             <!-- /.card-body -->

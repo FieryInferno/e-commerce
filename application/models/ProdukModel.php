@@ -188,6 +188,12 @@ class ProdukModel extends CI_Model {
 
   public function destroy($id)
   {
+    $produk = $this->getById($id);
+
+    foreach ($produk['image'] as $key) {
+      if (file_exists('./assets/image/' .  $key['gambar'])) unlink('./assets/image/' .  $key['gambar']);
+    }
+
     $this->db->delete('produk', ['id_produk' => $id]);
   }
 

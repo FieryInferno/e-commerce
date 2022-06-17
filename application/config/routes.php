@@ -42,3 +42,5 @@ $route['admin/produk/edit/(:any)']['get']   = 'ProdukController/edit/$1';
 $route['admin/produk/edit/(:any)']['post']  = 'ProdukController/update/$1';
 $route['admin/produk/hapus/(:any)']['post'] = 'ProdukController/destroy/$1';
 $route['admin/produk/detail/(:any)']['get'] = 'ProdukController/show/$1';
+
+$route['gambar/(:any)']['post']  = 'GambarController/index/$1';
