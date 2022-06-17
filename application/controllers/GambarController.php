@@ -26,4 +26,9 @@ class GambarController extends CI_Controller {
     header('Content-Type: application/json');
     echo $result;
   }
+
+  public function store()
+  {
+    $result = $this->ProdukModel->addGambar($this->input->post('produk_id'));
+  }
 }

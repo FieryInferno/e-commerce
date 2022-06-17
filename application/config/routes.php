@@ -44,4 +44,5 @@ $route['admin/produk/hapus/(:any)']['post'] = 'ProdukController/destroy/$1';
 $route['admin/produk/detail/(:any)']['get'] = 'ProdukController/show/$1';
 
 $route['gambar/(:any)']['post']         = 'GambarController/index/$1';
+$route['gambar']['post']                = 'GambarController/store';
 $route['gambar/delete/(:any)']['post']  = 'GambarController/destroy/$1';

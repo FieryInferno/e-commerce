@@ -163,24 +163,76 @@
                   <?= $type === 'edit' ? $deskripsi : ''; ?>
                 </textarea>
               </div>
-              <div class="col-md-12">
-                <div>
-                  <label for="namaProduk">Gambar Produk</label>
-                </div>
-                <a href="#" class="btn btn-success">Tambah</a>
-                <br/>
-                <br/>
-                <table id="table-gambar" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th width="10%">No</th>
-                    <th width="30%">Gambar</th>
-                    <th>Aksi</th>
-                  </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
+              <?php
+                if ($type === 'edit') { ?>
+                  <div class="col-md-12">
+                    <div>
+                      <label for="namaProduk">Gambar Produk</label>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-success"
+                      data-toggle="modal"
+                      data-target="#modalTambahGambar"
+                    >Tambah</button>
+
+                    <div class="modal fade" id="modalTambahGambar">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Tambah Gambar</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <form id="formTambah">
+                            <div class="modal-body" id="modalBody">
+                              <div class="form-group">
+                                <label for="image">Gambar</label>
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input
+                                      type="file"
+                                      class="custom-file-input"
+                                      id="image"
+                                      onchange="previewImg()"
+                                      name="image[]"
+                                      multiple
+                                    >
+                                    <label class="custom-file-label" for="image">Choose file</label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="text-center">
+                                <div id="productImages">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <div class="btn btn-success" onClick="tambahGambar('<?= $id_produk; ?>')">Tambah</div>
+                            </div>
+                          </form>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                    </div>
+                    <br/>
+                    <br/>
+                    <table id="table-gambar" class="table table-bordered table-hover">
+                      <thead>
+                      <tr>
+                        <th width="10%">No</th>
+                        <th width="30%">Gambar</th>
+                        <th>Aksi</th>
+                      </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                <?php }
+              ?>
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

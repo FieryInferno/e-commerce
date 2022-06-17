@@ -44,6 +44,13 @@
 
 <?php $this->load->view('admin/template/script'); ?>
 <script>
+  let Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 3000
+  });
+  
   $(function () {
     $("#example1").DataTable({
       responsive: true,
@@ -54,13 +61,6 @@
       placeholder: "Masukan",
       allowClear: true
     })
-
-    let Toast = Swal.mixin({
-      toast: true,
-      position: 'top',
-      showConfirmButton: false,
-      timer: 3000
-    });
     
     if ('<?= $this->session->success; ?>') {
       Toast.fire({
@@ -154,15 +154,47 @@
       url: `<?= base_url(); ?>gambar/delete/${id_gambar}`,
       success: () => {
         $('#modal' + id_gambar).modal('hide')
+        showSuccessNotif('Berhasil menghapus gambar');
         tabelGambar.ajax.reload();
       },
       error: (response) => console.log(response),
     });
   }
 
+  const showSuccessNotif = (message) => {
+    Toast.fire({
+      icon: 'success',
+      title: message,
+    })
+  }
+
+  const tambahGambar = (id_produk) => {
+    const formData  = new FormData();
+    const file      = document.querySelector('#image').files;
+
+    formData.append('produk_id', id_produk);
+    
+    for (let index = 0; index < file.length; index++) {
+      formData.append('image[]', file[index]);
+    }
+    
+    $.ajax({
+      url: `<?= base_url(); ?>gambar`,
+      type: 'POST',
+      data: formData,
+      processData: false,  // tell jQuery not to process the data
+      contentType: false,  // tell jQuery not to set contentType
+      success : function(data) {
+        $('#modalTambahGambar').modal('hide');
+        showSuccessNotif('Berhasil menambah gambar');
+        tabelGambar.ajax.reload();
+      }
+    });
+  }
+
   const previewImg = () => {
-    const gambar      = document.querySelector('#image');
-    const reader = new FileReader();
+    const gambar  = document.querySelector('#image');
+    const reader  = new FileReader();
 
     const readFile = (index) => {
       if( index >= gambar.files.length ) return;
