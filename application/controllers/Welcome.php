@@ -180,4 +180,22 @@ class Welcome extends CI_Controller {
 
     echo $snap_token;
   }
+
+  public function storeWishlist()
+  {
+    $data['id_user']    = $this->session->user['id_user'];
+    $data['id_produk']  = $this->input->post('id_produk');
+    $availableProduk    = $this->WishlistModel->getByUserAndProduk($data);
+    
+    $response;
+
+    if ($availableProduk) {
+      $response = 'error';  
+    } else {
+      $this->WishlistModel->insert($data);
+      $response = 'success';
+    }
+
+    echo $response;
+  }
 }

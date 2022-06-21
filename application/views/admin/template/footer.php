@@ -66,14 +66,14 @@
       Toast.fire({
         icon: 'success',
         title: '<?= $this->session->success; ?>',
-      })
+      });
     }
     
     if ('<?= $this->session->message; ?>') {
       Toast.fire({
         icon: 'error',
         title: '<?= $this->session->message; ?>',
-      })
+      });
     }
   
     $('.product-image-thumb').on('click', function () {

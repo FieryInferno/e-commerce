@@ -86,6 +86,7 @@
   <!-- Template Javascript -->
   <script src="<?= base_url(); ?>assets/eshopper/js/main.js"></script>
   <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-1gUtnXSu6YUOwNFg"></script>
+  <script src="<?= base_url(); ?>assets/adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
   <script>
     const addOrUpdateUrlParam = (name, value) => {
       let queryParams = new URLSearchParams(window.location.search);
@@ -124,13 +125,11 @@
         success: (token) => {
           snap.pay(token, {
             onSuccess: (result) => {
-              console.log(result);
               $("#status").val('success');
               $("#id_order").val(result.order_id);
               // $("#payment-form").submit();
             },
             onPending: (result) => {
-              console.log(result);
               $("#status").val('pending');
               $("#id_order").val(result.order_id);
               // $("#payment-form").submit();
@@ -143,6 +142,48 @@
         }
       });
     });
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timer: 3000
+    });
+
+    const addToWishlist = (data) => {
+      const id_produk = data.dataset.idProduk;
+      $.ajax({
+        url: '<?= base_url(); ?>shop/wishlist',
+        method: 'POST',
+        data: {'id_produk': id_produk},
+        cache: false,
+        success: (response) => {
+          switch (response) {
+            case 'success':
+              Toast.fire({
+                icon: 'success',
+                title: 'Berhasil menambah produk',
+              });
+              break;
+            case 'error':
+              Toast.fire({
+                icon: 'error',
+                title: 'Produk sudah ada',
+              });
+              break;
+          
+            default:
+              break;
+          }
+        },
+        error: (e) => {
+          Toast.fire({
+            icon: 'error',
+            title: e,
+          });
+        }
+      });
+    }
 
     // {
     //   "status_code":"201",

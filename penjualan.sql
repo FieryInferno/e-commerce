@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2022 at 03:34 AM
+-- Generation Time: Jun 21, 2022 at 02:58 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -43,6 +43,33 @@ INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gambar`
+--
+
+CREATE TABLE `gambar` (
+  `id_gambar` bigint(20) NOT NULL,
+  `produk_id` varchar(191) NOT NULL,
+  `gambar` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gambar`
+--
+
+INSERT INTO `gambar` (`id_gambar`, `produk_id`, `gambar`) VALUES
+(41, '62ac498d4c620', '1.jpg'),
+(42, '62ac498d4c620', '21.PNG'),
+(43, '62ac498d4c620', '22.PNG'),
+(44, '62ac498d4c620', '23.PNG'),
+(45, '62ac498d4c620', '24.PNG'),
+(46, '62ac498d4c620', '25.PNG'),
+(51, '62ac498d4c620', '26.PNG'),
+(52, '62ac8fd8370a5', '11.jpg'),
+(53, '62ac8fd8370a5', '211.PNG');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kategori`
 --
 
@@ -78,14 +105,6 @@ CREATE TABLE `keranjang` (
   `status` enum('pending','success') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `keranjang`
---
-
-INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `id_order`, `status`) VALUES
-(3, '1', 1, 'tosca', 'm', 2, NULL, NULL),
-(7, '1', 2, 'orange', 'm', 3, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -97,7 +116,6 @@ CREATE TABLE `produk` (
   `nama_produk` varchar(191) NOT NULL,
   `harga` int(191) NOT NULL,
   `diskon` int(191) NOT NULL,
-  `image` varchar(191) NOT NULL,
   `deskripsi` text NOT NULL,
   `kategori_id` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -107,18 +125,9 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga`, `diskon`, `image`, `deskripsi`, `kategori_id`, `created_at`) VALUES
-('1', 'Threat Black', 299000, 10, 'product-7.jpg', '<p>[OFFICIAL STORE VEARST]\r\n</p><p>MODEL SIZE LARGE</p>\r\n<p>Pemesanan sebelum jam 15.00 akan dikirimkan di hari yang sama dan \r\npemesanan diatas jam 15.00 akan dikirimkan di hari berikutnya, \r\npengiriman dilakukan di hari kerja.<br>\r\nUntuk size chart / detail ukuran bisa di cek pada foto produk halaman terakhir!</p>\r\n<p>Deskripsi produk :<br>\r\nLongsleeve Basic Tees<br>\r\n– 100% Cotton 24’S<br>\r\n– Screen printed graphic on front &amp; back</p>', 4, '2022-05-21 12:09:26'),
-('4', 'Bird Crewneck Misty', 369000, 0, 'product-62.jpg', '', 2, '2022-05-21 01:58:18'),
-('6288463b65dfe', 'Arnold Olive', 379000, 6, 'product-61.jpg', '', 3, '2022-05-21 01:54:03'),
-('62886b9a534ad', 'Brick Black', 119400, 0, 'product-63.jpg', '', 1, '2022-05-21 04:33:30'),
-('62886d8f1a2e1', 'Desk White', 119400, 0, 'product-64.jpg', '', 1, '2022-05-21 04:41:51'),
-('62886dbb14781', 'Dread White', 119400, 0, 'product-65.jpg', '', 1, '2022-05-21 04:42:35'),
-('62888c59850410', 'a', 1, 1, 'product-66.jpg', '', 1, '2022-05-21 06:53:13'),
-('62888c5985047', 'a', 1, 1, 'product-66.jpg', '', 1, '2022-05-21 06:53:13'),
-('62888c5985048', 'a', 1, 1, 'product-66.jpg', '', 1, '2022-05-21 06:53:13'),
-('62888c5985049', 'a', 1, 1, 'product-66.jpg', '', 1, '2022-05-21 06:53:13'),
-('6288cdf35c9af', 'Luke Crewneck Olive', 389000, 13, 'product-67.jpg', '<div class=\"accordion-inner\" style=\"display: block;\">\n<p>Model size L</p>\n[OFFICIAL STORE VEARST] Pemesanan sebelum jam 15.00 akan dikirimkan di \nhari yang sama dan pemesanan diatas jam 15.00 akan dikirimkan di hari \nberikutnya, pengiriman dilakukan di hari kerja. Untuk size chart / \ndetail ukuran bisa di cek pada foto produk halaman terakhir!\n<p>Deskripsi produk :</p>\n<ul><li>Cotton Fleece</li><li>Screen printed graphic on front</li><li>Ribbed cuffs and hem</li><li>Utility pocket on front &amp; zip closure</li><li>Snap button</li></ul>\n</div><p></p>', 2, '2022-05-21 11:33:22');
+INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga`, `diskon`, `deskripsi`, `kategori_id`, `created_at`) VALUES
+('62ac498d4c620', 'Brick Black', 199000, 3, '                                  [OFFICIAL STORE VEARST]\r\n<p>MODEL SIZE LARGE</p>\r\n<p>Pemesanan sebelum jam 15.00 akan dikirimkan di hari yang sama dan \r\npemesanan diatas jam 15.00 akan dikirimkan di hari berikutnya, \r\npengiriman dilakukan di hari kerja.<br>\r\nUntuk size chart / detail ukuran bisa di cek pada foto produk halaman terakhir!</p>\r\n<p>Deskripsi produk :<br>\r\nLongsleeve Basic Tees<br>\r\n– 100% Cotton 24’S<br>\r\n– Screen printed graphic on front &amp; back</p>', 1, '2022-06-17 09:29:49'),
+('62ac8fd8370a5', 'Mick White', 199000, 0, '                                  [OFFICIAL STORE VEARST]\r\n<p>MODEL SIZE LARGE</p>\r\n<p>Pemesanan sebelum jam 15.00 akan dikirimkan di hari yang sama dan \r\npemesanan diatas jam 15.00 akan dikirimkan di hari berikutnya, \r\npengiriman dilakukan di hari kerja.<br>\r\nUntuk size chart / detail ukuran bisa di cek pada foto produk halaman terakhir!</p>\r\n<p>Deskripsi produk :<br>\r\nLongsleeve Basic Tees<br>\r\n– 100% Cotton 24’S<br>\r\n– Screen printed graphic on front &amp; back</p>', 1, '2022-06-17 14:29:44');
 
 -- --------------------------------------------------------
 
@@ -137,17 +146,9 @@ CREATE TABLE `ukuran_produk` (
 --
 
 INSERT INTO `ukuran_produk` (`id_ukuran_produk`, `produk_id`, `ukuran`) VALUES
-(6, '62886dbb14781', 'xs'),
-(7, '62886dbb14781', 's'),
-(8, '62886dbb14781', 'm'),
-(9, '62886dbb14781', 'l'),
-(10, '62886dbb14781', 'xl'),
-(12, '4', 'l'),
-(13, '4', 'xl'),
-(14, '62888c5985047', 'xs'),
-(15, '6288cdf35c9af', 'xs'),
-(16, '6288cdf35c9af', 'm'),
-(17, '1', 'm');
+(86, '62ac498d4c620', 's'),
+(87, '62ac498d4c620', 'm'),
+(88, '62ac8fd8370a5', 's');
 
 -- --------------------------------------------------------
 
@@ -189,17 +190,27 @@ CREATE TABLE `warna_produk` (
 --
 
 INSERT INTO `warna_produk` (`id_warna_produk`, `produk_id`, `warna`) VALUES
-(1, '6288463b65dfe', 'hitam'),
-(2, '6288463b65dfe', 'abu'),
-(3, '6288463b65dfe', 'hijau'),
-(12, '62886b9a534ad', 'hitam'),
-(13, '62886d8f1a2e1', 'hijau'),
-(17, '4', 'hitam'),
-(18, '4', 'biru'),
-(19, '62888c5985047', 'merah'),
-(20, '6288cdf35c9af', 'putih'),
-(21, '1', 'orange'),
-(22, '1', 'tosca');
+(48, '62ac498d4c620', 'hitam'),
+(49, '62ac8fd8370a5', 'white');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `id_wishlist` bigint(20) NOT NULL,
+  `id_user` bigint(20) NOT NULL,
+  `id_produk` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id_wishlist`, `id_user`, `id_produk`) VALUES
+(1, 2, '62ac498d4c620');
 
 --
 -- Indexes for dumped tables
@@ -210,6 +221,13 @@ INSERT INTO `warna_produk` (`id_warna_produk`, `produk_id`, `warna`) VALUES
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indexes for table `gambar`
+--
+ALTER TABLE `gambar`
+  ADD PRIMARY KEY (`id_gambar`),
+  ADD KEY `gambar_ibfk_1` (`produk_id`);
 
 --
 -- Indexes for table `kategori`
@@ -253,6 +271,14 @@ ALTER TABLE `warna_produk`
   ADD KEY `produk_id` (`produk_id`);
 
 --
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id_wishlist`),
+  ADD KEY `id_produk` (`id_produk`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -261,6 +287,12 @@ ALTER TABLE `warna_produk`
 --
 ALTER TABLE `admin`
   MODIFY `id_admin` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `gambar`
+--
+ALTER TABLE `gambar`
+  MODIFY `id_gambar` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -278,7 +310,7 @@ ALTER TABLE `keranjang`
 -- AUTO_INCREMENT for table `ukuran_produk`
 --
 ALTER TABLE `ukuran_produk`
-  MODIFY `id_ukuran_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_ukuran_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -290,11 +322,23 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `warna_produk`
 --
 ALTER TABLE `warna_produk`
-  MODIFY `id_warna_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_warna_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id_wishlist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `gambar`
+--
+ALTER TABLE `gambar`
+  ADD CONSTRAINT `gambar_ibfk_1` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `keranjang`
@@ -320,6 +364,13 @@ ALTER TABLE `ukuran_produk`
 --
 ALTER TABLE `warna_produk`
   ADD CONSTRAINT `warna_produk_ibfk_1` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
