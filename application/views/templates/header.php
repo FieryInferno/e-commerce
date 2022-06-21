@@ -39,9 +39,9 @@
       <div class="col-lg-3 col-6 text-right">
         <?php
           if ($this->session->user) { ?>
-            <a href="" class="btn border">
+            <a href="<?= base_url(); ?>wishlist" class="btn border">
               <i class="fas fa-heart text-primary"></i>
-              <span class="badge">0</span>
+              <span class="badge"><?= $jumlahWishlist; ?></span>
             </a>
             <a href="<?= base_url(); ?>shop/cart" class="btn border">
               <i class="fas fa-shopping-cart text-primary"></i>

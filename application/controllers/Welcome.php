@@ -21,6 +21,7 @@ class Welcome extends CI_Controller {
       'produk'          => $this->ProdukModel->getAll(['limit' => 12]),
       'type'            => 'home',
       'jumlahKeranjang' => $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0,
+      'jumlahWishlist'  => $this->session->user ? count($this->WishlistModel->getByUser($this->session->user['id_user'])) : 0,
     ]);
 	}
 
@@ -47,6 +48,7 @@ class Welcome extends CI_Controller {
       'limaratus'       => $this->ProdukModel->getAll(array_merge($filter, ['filterByPrice' => '400-500'])),
       'warna'           => $this->ProdukModel->getAllWarna(),
       'jumlahKeranjang' => $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0,
+      'jumlahWishlist'  => $this->session->user ? count($this->WishlistModel->getByUser($this->session->user['id_user'])) : 0,
     ];
 
     foreach ($data['warna'] as $key) {
@@ -61,6 +63,7 @@ class Welcome extends CI_Controller {
     $data                     = $this->ProdukModel->getById($id_produk);
     $data['type']             = 'shop';
     $data['jumlahKeranjang']  = $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0;
+    $data['jumlahWishlist']   = $this->session->user ? count($this->WishlistModel->getByUser($this->session->user['id_user'])) : 0;
     
     $this->load->view('detailProduk', $data);
   }
@@ -71,6 +74,7 @@ class Welcome extends CI_Controller {
       'type'            => 'cart',
       'keranjang'       => $this->KeranjangModel->getByUser($this->session->user['id_user']),
       'jumlahKeranjang' => $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0,
+      'jumlahWishlist'  => $this->session->user ? count($this->WishlistModel->getByUser($this->session->user['id_user'])) : 0,
     ]);
   }
 
@@ -183,8 +187,8 @@ class Welcome extends CI_Controller {
 
   public function storeWishlist()
   {
-    $data['id_user']    = $this->session->user['id_user'];
-    $data['id_produk']  = $this->input->post('id_produk');
+    $data['user_id']    = $this->session->user['id_user'];
+    $data['produk_id']  = $this->input->post('id_produk');
     $availableProduk    = $this->WishlistModel->getByUserAndProduk($data);
     
     $response;
@@ -197,5 +201,22 @@ class Welcome extends CI_Controller {
     }
 
     echo $response;
+  }
+
+  public function wishlist()
+  {
+    $this->load->view('wishlist', [
+      'type'            => 'wishlist',
+      'wishlist'        => $this->WishlistModel->getByUser($this->session->user['id_user']),
+      'jumlahKeranjang' => $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0,
+      'jumlahWishlist'  => $this->session->user ? count($this->WishlistModel->getByUser($this->session->user['id_user'])) : 0,
+    ]);
+  }
+
+  public function destroyWishlist($id_wishlist)
+  {
+    $this->WishlistModel->delete($id_wishlist);
+    $this->session->set_flashdata('success', 'Berhasil hapus wishlist');
+    redirect('wishlist');    
   }
 }

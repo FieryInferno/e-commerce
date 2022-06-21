@@ -19,7 +19,10 @@ $route['shop/(:num)']           = 'Welcome/shop';
 $route['shop/detail/(:any)']    = 'Welcome/show/$1';
 $route['shop/token']['get']     = 'Welcome/token';
 $route['shop/checkout']['post'] = 'Welcome/checkout';
-$route['shop/wishlist']['post'] = 'Welcome/storeWishlist';
+
+$route['wishlist']['post']              = 'Welcome/storeWishlist';
+$route['wishlist']['get']               = 'Welcome/wishlist';
+$route['wishlist/delete/(:num)']['get'] = 'Welcome/destroyWishlist/$1';
 
 $route['shop/cart']['get']                = 'Welcome/cart';
 $route['shop/cart/(:any)']['post']        = 'Welcome/addCart/$1';

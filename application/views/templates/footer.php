@@ -149,11 +149,18 @@
       showConfirmButton: false,
       timer: 3000
     });
+    
+    if ('<?= $this->session->success; ?>') {
+      Toast.fire({
+        icon: 'success',
+        title: '<?= $this->session->success; ?>',
+      });
+    }
 
     const addToWishlist = (data) => {
       const id_produk = data.dataset.idProduk;
       $.ajax({
-        url: '<?= base_url(); ?>shop/wishlist',
+        url: '<?= base_url(); ?>wishlist',
         method: 'POST',
         data: {'id_produk': id_produk},
         cache: false,
@@ -179,7 +186,7 @@
         error: (e) => {
           Toast.fire({
             icon: 'error',
-            title: e,
+            title: 'Unknown error occured',
           });
         }
       });

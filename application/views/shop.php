@@ -213,13 +213,13 @@
                   <img class="img-fluid w-100" src="<?= count($key['image']) > 0 ? base_url('assets/image/' . $key['image'][0]['gambar']) : ''; ?>" alt="">
                 </div>
                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                  <h6 class="text-truncate mb-3"><?= $key['nama_produk']; ?></h6>
+                  <h6 class="text-truncate mb-3" style="color: black;"><?= $key['nama_produk']; ?></h6>
                   <div class="d-flex justify-content-center">
                     <?php
                       if ($key['diskon']) { ?>
-                        <h6><?= formatRupiah((int) $key['harga'] - (int) $key['harga'] * (int) $key['diskon'] / 100); ?></h6><h6 class="text-muted ml-2"><del><?= formatRupiah((int) $key['harga']); ?></del></h6>
+                        <h6 style="color: black;"><?= formatRupiah((int) $key['harga'] - (int) $key['harga'] * (int) $key['diskon'] / 100); ?></h6><h6 class="text-muted ml-2"><del><?= formatRupiah((int) $key['harga']); ?></del></h6>
                       <?php } else { ?>
-                        <h6><?= formatRupiah((int) $key['harga']); ?></h6>
+                        <h6 style="color: black;"><?= formatRupiah((int) $key['harga']); ?></h6>
                       <?php }
                     ?>
                   </div>
