@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2022 at 02:58 PM
+-- Generation Time: Jun 21, 2022 at 05:32 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -105,6 +105,13 @@ CREATE TABLE `keranjang` (
   `status` enum('pending','success') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `keranjang`
+--
+
+INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `id_order`, `status`) VALUES
+(8, '62ac498d4c620', 2, 'hitam', 's', 1, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -201,16 +208,16 @@ INSERT INTO `warna_produk` (`id_warna_produk`, `produk_id`, `warna`) VALUES
 
 CREATE TABLE `wishlist` (
   `id_wishlist` bigint(20) NOT NULL,
-  `id_user` bigint(20) NOT NULL,
-  `id_produk` varchar(191) NOT NULL
+  `user_id` bigint(20) NOT NULL,
+  `produk_id` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `wishlist`
 --
 
-INSERT INTO `wishlist` (`id_wishlist`, `id_user`, `id_produk`) VALUES
-(1, 2, '62ac498d4c620');
+INSERT INTO `wishlist` (`id_wishlist`, `user_id`, `produk_id`) VALUES
+(3, 2, '62ac498d4c620');
 
 --
 -- Indexes for dumped tables
@@ -275,8 +282,8 @@ ALTER TABLE `warna_produk`
 --
 ALTER TABLE `wishlist`
   ADD PRIMARY KEY (`id_wishlist`),
-  ADD KEY `id_produk` (`id_produk`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_produk` (`produk_id`),
+  ADD KEY `id_user` (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -304,7 +311,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`
@@ -328,7 +335,7 @@ ALTER TABLE `warna_produk`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id_wishlist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_wishlist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -369,8 +376,8 @@ ALTER TABLE `warna_produk`
 -- Constraints for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
