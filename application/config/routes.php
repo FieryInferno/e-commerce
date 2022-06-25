@@ -7,6 +7,9 @@ $route['translate_uri_dashes']  = FALSE;
 $route['user']                  = 'UserController';
 $route['admin/user']['get']     = 'AdminController/user';
 
+$route['order']['get']        = 'OrderController';
+$route['order/(:any)']['get'] = 'OrderController/show/$1';
+
 $route['login']['get']    = 'LoginController/user';
 $route['login']['post']   = 'LoginController/userAuth';
 $route['logout']['post']  = 'LoginController/logout';

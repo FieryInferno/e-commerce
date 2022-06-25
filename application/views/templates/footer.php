@@ -127,12 +127,14 @@
             onSuccess: (result) => {
               $("#status").val('success');
               $("#id_order").val(result.order_id);
-              // $("#payment-form").submit();
+              $("#detail").val(JSON.stringify(result));
+              $("#payment-form").submit();
             },
             onPending: (result) => {
               $("#status").val('pending');
               $("#id_order").val(result.order_id);
-              // $("#payment-form").submit();
+              $("#detail").val(JSON.stringify(result));
+              $("#payment-form").submit();
             },
             onError: (result) => {
               console.log(result.status_message);

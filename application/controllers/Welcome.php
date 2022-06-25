@@ -114,7 +114,14 @@ class Welcome extends CI_Controller {
 
   public function checkout()
   {
-    $this->KeranjangModel->checkout($this->input->post());
+    $this->PemesananModel->insert($this->session->user['id_user'], $this->input->post());
+
+    $id_keranjang = $this->input->post('id_keranjang');
+
+    foreach ($id_keranjang as $key) {
+      $this->KeranjangModel->checkout($key, $this->input->post());
+    }
+
     redirect('order');
   }
 
@@ -137,7 +144,7 @@ class Welcome extends CI_Controller {
 
     // Required
     $transaction_details = array(
-      'order_id'      => rand(),
+      'order_id'      => uniqid(),
       'gross_amount'  => $grossAmount, // no decimal allowed for creditcard
     );
     
@@ -149,8 +156,8 @@ class Welcome extends CI_Controller {
     
     // Optional, remove this to display all available payment methods
     $enable_payments = [
-      // "credit_card",
-      "gopay",
+      "credit_card",
+      // "gopay",
       "shopeepay",
       "permata_va",
       "bca_va",

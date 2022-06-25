@@ -104,6 +104,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?= base_url(); ?>order" class="nav-link <?= $active === 'order' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>My Order</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?= base_url(); ?>user/address" class="nav-link <?= $active === 'address' ? 'active' : ''; ?>">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>Alamat</p>

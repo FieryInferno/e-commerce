@@ -14,7 +14,10 @@ class KeranjangModel extends CI_Model {
   public function getByUser($id_user)
   {
     $this->db->join('produk', 'keranjang.produk_id = produk.id_produk');
-    return $this->db->get_where('keranjang', ['user_id' => $id_user])->result_array();
+    return $this->db->get_where('keranjang', [
+      'user_id'       => $id_user,
+      'pemesanan_id'  => null,
+    ])->result_array();
   }
 
   public function updateCart($id_keranjang, $data)
@@ -33,11 +36,25 @@ class KeranjangModel extends CI_Model {
     $this->db->delete('keranjang', ['id_keranjang' => $id_keranjang]);
   }
 
-  public function checkout($data)
+  public function checkout($id_keranjang, $data)
   {
     $this->db->update('keranjang', [
-      'id_order'  => $data['id_order'],
-      'status'    => $data['status'],
-    ], ['id_keranjang'  => $data['id_keranjang']]);
+      'pemesanan_id'  => $data['id_order'],
+      'status'        => $data['status'],
+    ], ['id_keranjang'  => $id_keranjang]);
+  }
+
+  public function pemesanan($id_pemesanan)
+  {
+    $this->db->join('produk', 'keranjang.produk_id = produk.id_produk');
+    $this->db->join('kategori', 'produk.kategori_id = kategori.id_kategori');
+    $data = $this->db->get_where('keranjang', ['pemesanan_id' => $id_pemesanan])->result_array();
+
+    for ($i=0; $i < count($data); $i++) {
+      $key                = $data[$i];
+      $data[$i]['image']  = $this->db->get_where('gambar', ['produk_id' => $key['id_produk']])->result_array();
+    }
+
+    return $data;
   }
 }

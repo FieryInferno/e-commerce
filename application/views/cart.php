@@ -20,6 +20,7 @@
       <form action="<?= base_url(); ?>shop/checkout" method="post" id="payment-form">
         <input type="hidden" name="status" id="status">
         <input type="hidden" name="id_order" id="id_order">
+        <input type="hidden" name="detail" id="detail">
         <table class="table table-bordered text-center mb-0">
           <thead class="bg-secondary text-dark">
             <tr>
