@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2022 at 05:32 PM
+-- Generation Time: Jun 25, 2022 at 01:55 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -101,7 +101,7 @@ CREATE TABLE `keranjang` (
   `warna` varchar(191) NOT NULL,
   `ukuran` enum('xs','s','m','l','xl') NOT NULL,
   `kuantitas` int(191) NOT NULL,
-  `id_order` varchar(191) DEFAULT NULL,
+  `pemesanan_id` varchar(191) DEFAULT NULL,
   `status` enum('pending','success') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -109,8 +109,27 @@ CREATE TABLE `keranjang` (
 -- Dumping data for table `keranjang`
 --
 
-INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `id_order`, `status`) VALUES
-(8, '62ac498d4c620', 2, 'hitam', 's', 1, NULL, NULL);
+INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `pemesanan_id`, `status`) VALUES
+(10, '62ac498d4c620', 2, 'hitam', 's', 1, '62b6f0dc36931', 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemesanan`
+--
+
+CREATE TABLE `pemesanan` (
+  `id_pemesanan` varchar(191) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `detail` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `detail`) VALUES
+('62b6f0dc36931', 2, '{\"status_code\":\"201\",\"status_message\":\"Success, transaction is found\",\"transaction_id\":\"15559bf6-b626-4bf1-b81c-3b33ab296042\",\"order_id\":\"62b6f0dc36931\",\"gross_amount\":\"199000.00\",\"payment_type\":\"bank_transfer\",\"transaction_time\":\"2022-06-25 18:26:25\",\"transaction_status\":\"pending\",\"va_numbers\":[{\"bank\":\"bri\",\"va_number\":\"088788992507810929\"}],\"fraud_status\":\"accept\",\"pdf_url\":\"https://app.sandbox.midtrans.com/snap/v1/transactions/9ab1a674-23a3-49cd-90f8-7d6802e14a51/pdf\",\"finish_redirect_url\":\"http://example.com?order_id=62b6f0dc36931&status_code=201&transaction_status=pending\"}');
 
 -- --------------------------------------------------------
 
@@ -213,13 +232,6 @@ CREATE TABLE `wishlist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `wishlist`
---
-
-INSERT INTO `wishlist` (`id_wishlist`, `user_id`, `produk_id`) VALUES
-(3, 2, '62ac498d4c620');
-
---
 -- Indexes for dumped tables
 --
 
@@ -248,6 +260,14 @@ ALTER TABLE `kategori`
 ALTER TABLE `keranjang`
   ADD PRIMARY KEY (`id_keranjang`),
   ADD KEY `produk_id` (`produk_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `pemesanan_id` (`pemesanan_id`);
+
+--
+-- Indexes for table `pemesanan`
+--
+ALTER TABLE `pemesanan`
+  ADD PRIMARY KEY (`id_pemesanan`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -311,7 +331,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`
@@ -335,7 +355,7 @@ ALTER TABLE `warna_produk`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id_wishlist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_wishlist` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -352,7 +372,14 @@ ALTER TABLE `gambar`
 --
 ALTER TABLE `keranjang`
   ADD CONSTRAINT `keranjang_ibfk_1` FOREIGN KEY (`produk_id`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `keranjang_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `keranjang_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `keranjang_ibfk_3` FOREIGN KEY (`pemesanan_id`) REFERENCES `pemesanan` (`id_pemesanan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pemesanan`
+--
+ALTER TABLE `pemesanan`
+  ADD CONSTRAINT `pemesanan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `produk`
