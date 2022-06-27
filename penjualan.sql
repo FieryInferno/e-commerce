@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 25, 2022 at 01:55 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Host: localhost:3306
+-- Generation Time: Jun 27, 2022 at 11:55 PM
+-- Server version: 5.7.38
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `penjualan`
+-- Database: `fa165esq_penjualan`
 --
 
 -- --------------------------------------------------------
@@ -102,7 +103,7 @@ CREATE TABLE `keranjang` (
   `ukuran` enum('xs','s','m','l','xl') NOT NULL,
   `kuantitas` int(191) NOT NULL,
   `pemesanan_id` varchar(191) DEFAULT NULL,
-  `status` enum('pending','success') DEFAULT NULL
+  `status` enum('pending','settlement','deny','expire','cancel') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -110,7 +111,7 @@ CREATE TABLE `keranjang` (
 --
 
 INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `pemesanan_id`, `status`) VALUES
-(10, '62ac498d4c620', 2, 'hitam', 's', 1, '62b6f0dc36931', 'pending');
+(16, '62ac498d4c620', 2, 'hitam', 's', 1, '62b9e09e4ef19', 'settlement');
 
 -- --------------------------------------------------------
 
@@ -129,7 +130,7 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `detail`) VALUES
-('62b6f0dc36931', 2, '{\"status_code\":\"201\",\"status_message\":\"Success, transaction is found\",\"transaction_id\":\"15559bf6-b626-4bf1-b81c-3b33ab296042\",\"order_id\":\"62b6f0dc36931\",\"gross_amount\":\"199000.00\",\"payment_type\":\"bank_transfer\",\"transaction_time\":\"2022-06-25 18:26:25\",\"transaction_status\":\"pending\",\"va_numbers\":[{\"bank\":\"bri\",\"va_number\":\"088788992507810929\"}],\"fraud_status\":\"accept\",\"pdf_url\":\"https://app.sandbox.midtrans.com/snap/v1/transactions/9ab1a674-23a3-49cd-90f8-7d6802e14a51/pdf\",\"finish_redirect_url\":\"http://example.com?order_id=62b6f0dc36931&status_code=201&transaction_status=pending\"}');
+('62b9e09e4ef19', 2, '{\"status_code\":\"201\",\"status_message\":\"Success, transaction is found\",\"transaction_id\":\"74231443-34f3-4cae-86b7-be16107dd66a\",\"order_id\":\"62b9e09e4ef19\",\"gross_amount\":\"199000.00\",\"payment_type\":\"bank_transfer\",\"transaction_time\":\"2022-06-27 23:53:54\",\"transaction_status\":\"pending\",\"va_numbers\":[{\"bank\":\"bri\",\"va_number\":\"088781317584362825\"}],\"fraud_status\":\"accept\",\"pdf_url\":\"https://app.sandbox.midtrans.com/snap/v1/transactions/6f929a37-a97b-4ae9-9a07-566a145786ac/pdf\",\"finish_redirect_url\":\"http://example.com?order_id=62b9e09e4ef19&status_code=201&transaction_status=pending\"}');
 
 -- --------------------------------------------------------
 
@@ -144,7 +145,7 @@ CREATE TABLE `produk` (
   `diskon` int(191) NOT NULL,
   `deskripsi` text NOT NULL,
   `kategori_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -331,7 +332,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`
