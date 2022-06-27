@@ -29,7 +29,7 @@ class Welcome extends CI_Controller {
   {
     $notif = new \Midtrans\Notification();
     
-    $this->db->insert('test_midtrans', ['notif' => json_encode($notif)]);
+    $this->db->insert('test_midtrans', ['notif' => $notif->payment_type]);
   }
 
   public function shop()
