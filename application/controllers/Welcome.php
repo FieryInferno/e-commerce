@@ -27,7 +27,7 @@ class Welcome extends CI_Controller {
 
   public function notification()
   {
-    $notif  = Midtrans\Notification();
+    $notif = new \Midtrans\Notification();
     
     $this->db->insert('test_midtrans', ['notif' => json_encode($notif)]);
   }
