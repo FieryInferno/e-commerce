@@ -14,7 +14,7 @@ class OrderController extends CI_Controller {
 		$this->load->view('user/order', [
       'title'   => 'Pemesanan',
       'active'  => 'order',
-      'order'   => $this->PemesananModel->all($this->session->user['id_user']),
+      'order'   => $this->PemesananModel->getByIdUser($this->session->user['id_user']),
     ]);
 	}
 

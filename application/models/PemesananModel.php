@@ -14,7 +14,7 @@ class PemesananModel extends CI_Model {
     ]);
   }
 
-  public function all($id_user)
+  public function getByIdUser($id_user)
   {
     $data = $this->db->get_where('pemesanan', ['user_id' => $id_user])->result_array();
 

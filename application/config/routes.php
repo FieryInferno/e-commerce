@@ -6,6 +6,7 @@ $route['404_override']          = 'LoginController/error404';
 $route['translate_uri_dashes']  = FALSE;
 $route['user']                  = 'UserController';
 $route['admin/user']['get']     = 'AdminController/user';
+$route['notification']['get']   = 'Welcome/notification';
 
 $route['order']['get']        = 'OrderController';
 $route['order/(:any)']['get'] = 'OrderController/show/$1';
