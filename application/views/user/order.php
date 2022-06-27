@@ -63,6 +63,9 @@
                             case 'pending': ?>
                               <div class="btn btn-warning">Pending</div>
                               <?php break;
+                            case 'settlement': ?>
+                              <div class="btn btn-primary">Sudah dibayar</div>
+                              <?php break;
                             
                             default:
                               # code...
