@@ -25,11 +25,13 @@ class Welcome extends CI_Controller {
     ]);
 	}
 
-  public function notication()
+  public function notification()
   {
     $notif  = Midtrans\Notification();
 
-    $this->db->insert('test_midtrans', ['notif' => json_encode($notif)]);
+    print_r($notif);
+    die();
+    // $this->db->insert('test_midtrans', ['notif' => json_encode($notif)]);
   }
 
   public function shop()
