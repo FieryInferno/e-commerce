@@ -27,9 +27,9 @@ class Welcome extends CI_Controller {
 
   public function notification()
   {
-    $notif = new \Midtrans\Notification();
+    $data = new \Midtrans\Notification();
     
-    $this->db->insert('test_midtrans', ['notif' => $notif->payment_type]);
+    $this->PemesananModel->updateStatus($data);
   }
 
   public function shop()

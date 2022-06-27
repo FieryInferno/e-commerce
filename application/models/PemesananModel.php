@@ -33,4 +33,31 @@ class PemesananModel extends CI_Model {
 
     return $data;
   }
+
+  public function updateStatus($data)
+  {
+    switch ($data->transaction_status) {
+      case 'settlement':
+        $transaction_status = 'settlement';
+        break;
+      case 'pending':
+        $transaction_status = 'pending';
+        break;
+      case 'deny':
+        $transaction_status = 'deny';
+        break;
+      case 'expire':
+        $transaction_status = 'expire';
+        break;
+      case 'cancel':
+        $transaction_status = 'cancel';
+        break;
+      
+      default:
+        # code...
+        break;
+    }
+
+    $this->db->update('keranjang', ['status' => $transaction_status], ['pemesanan_id' => $data->order_id]);
+  }
 }
