@@ -177,8 +177,6 @@ class ProdukModel extends CI_Model {
     $this->addWarna($warna, $id);
     $this->db->where('produk_id', $id)->delete('ukuran_produk');
     $this->addUkuran($ukuran, $id);
-    $this->db->where('produk_id', $id)->delete('gambar');
-    $this->addGambar($id);
   }
 
   public function getById($id)
