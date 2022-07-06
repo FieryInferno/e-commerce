@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 27, 2022 at 11:55 PM
--- Server version: 5.7.38
--- PHP Version: 7.4.29
+-- Host: 127.0.0.1
+-- Generation Time: Jul 06, 2022 at 05:14 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fa165esq_penjualan`
+-- Database: `penjualan`
 --
 
 -- --------------------------------------------------------
@@ -66,7 +65,12 @@ INSERT INTO `gambar` (`id_gambar`, `produk_id`, `gambar`) VALUES
 (46, '62ac498d4c620', '25.PNG'),
 (51, '62ac498d4c620', '26.PNG'),
 (52, '62ac8fd8370a5', '11.jpg'),
-(53, '62ac8fd8370a5', '211.PNG');
+(53, '62ac8fd8370a5', '211.PNG'),
+(64, '62bdac7448102', '12.PNG'),
+(65, '62bdac7448102', '28.PNG'),
+(66, '62bdac7448102', '32.PNG'),
+(67, '62bdac7448102', '42.PNG'),
+(68, '62bdac7448102', '52.PNG');
 
 -- --------------------------------------------------------
 
@@ -145,7 +149,7 @@ CREATE TABLE `produk` (
   `diskon` int(191) NOT NULL,
   `deskripsi` text NOT NULL,
   `kategori_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -154,7 +158,8 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga`, `diskon`, `deskripsi`, `kategori_id`, `created_at`) VALUES
 ('62ac498d4c620', 'Brick Black', 199000, 3, '                                  [OFFICIAL STORE VEARST]\r\n<p>MODEL SIZE LARGE</p>\r\n<p>Pemesanan sebelum jam 15.00 akan dikirimkan di hari yang sama dan \r\npemesanan diatas jam 15.00 akan dikirimkan di hari berikutnya, \r\npengiriman dilakukan di hari kerja.<br>\r\nUntuk size chart / detail ukuran bisa di cek pada foto produk halaman terakhir!</p>\r\n<p>Deskripsi produk :<br>\r\nLongsleeve Basic Tees<br>\r\n– 100% Cotton 24’S<br>\r\n– Screen printed graphic on front &amp; back</p>', 1, '2022-06-17 09:29:49'),
-('62ac8fd8370a5', 'Mick White', 199000, 0, '                                  [OFFICIAL STORE VEARST]\r\n<p>MODEL SIZE LARGE</p>\r\n<p>Pemesanan sebelum jam 15.00 akan dikirimkan di hari yang sama dan \r\npemesanan diatas jam 15.00 akan dikirimkan di hari berikutnya, \r\npengiriman dilakukan di hari kerja.<br>\r\nUntuk size chart / detail ukuran bisa di cek pada foto produk halaman terakhir!</p>\r\n<p>Deskripsi produk :<br>\r\nLongsleeve Basic Tees<br>\r\n– 100% Cotton 24’S<br>\r\n– Screen printed graphic on front &amp; back</p>', 1, '2022-06-17 14:29:44');
+('62ac8fd8370a5', 'Mick White', 199000, 0, '                                  [OFFICIAL STORE VEARST]\r\n<p>MODEL SIZE LARGE</p>\r\n<p>Pemesanan sebelum jam 15.00 akan dikirimkan di hari yang sama dan \r\npemesanan diatas jam 15.00 akan dikirimkan di hari berikutnya, \r\npengiriman dilakukan di hari kerja.<br>\r\nUntuk size chart / detail ukuran bisa di cek pada foto produk halaman terakhir!</p>\r\n<p>Deskripsi produk :<br>\r\nLongsleeve Basic Tees<br>\r\n– 100% Cotton 24’S<br>\r\n– Screen printed graphic on front &amp; back</p>', 1, '2022-06-17 14:29:44'),
+('62bdac7448102', 'a', 199000, 1, '                                    1                                ', 1, '2022-06-30 14:08:06');
 
 -- --------------------------------------------------------
 
@@ -175,7 +180,10 @@ CREATE TABLE `ukuran_produk` (
 INSERT INTO `ukuran_produk` (`id_ukuran_produk`, `produk_id`, `ukuran`) VALUES
 (86, '62ac498d4c620', 's'),
 (87, '62ac498d4c620', 'm'),
-(88, '62ac8fd8370a5', 's');
+(88, '62ac8fd8370a5', 's'),
+(99, '62bdac7448102', 'xs'),
+(100, '62bdac7448102', 's'),
+(101, '62bdac7448102', 'm');
 
 -- --------------------------------------------------------
 
@@ -218,7 +226,8 @@ CREATE TABLE `warna_produk` (
 
 INSERT INTO `warna_produk` (`id_warna_produk`, `produk_id`, `warna`) VALUES
 (48, '62ac498d4c620', 'hitam'),
-(49, '62ac8fd8370a5', 'white');
+(49, '62ac8fd8370a5', 'white'),
+(54, '62bdac7448102', 'hitam');
 
 -- --------------------------------------------------------
 
@@ -320,7 +329,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `gambar`
 --
 ALTER TABLE `gambar`
-  MODIFY `id_gambar` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_gambar` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -338,7 +347,7 @@ ALTER TABLE `keranjang`
 -- AUTO_INCREMENT for table `ukuran_produk`
 --
 ALTER TABLE `ukuran_produk`
-  MODIFY `id_ukuran_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id_ukuran_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -350,7 +359,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `warna_produk`
 --
 ALTER TABLE `warna_produk`
-  MODIFY `id_warna_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_warna_produk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
