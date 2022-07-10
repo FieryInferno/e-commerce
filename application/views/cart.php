@@ -18,8 +18,8 @@
   <div class="row px-xl-5">
     <div class="col-lg-8 table-responsive mb-5">
       <form action="<?= base_url(); ?>shop/checkout" method="post" id="payment-form">
-        <input type="hidden" name="status" id="status">
-        <input type="hidden" name="id_order" id="id_order">
+        <input type="hidden" name="status" id="status" value="pending">
+        <input type="hidden" name="id_order" id="id_order" value="<?= uniqid(); ?>">
         <input type="hidden" name="detail" id="detail">
         <table class="table table-bordered text-center mb-0">
           <thead class="bg-secondary text-dark">
@@ -27,6 +27,8 @@
               <th>Nama Produk</th>
               <th>Harga</th>
               <th>Kuantitas</th>
+              <th>Warna</th>
+              <th>Ukuran</th>
               <th>Total</th>
               <th>Hapus</th>
             </tr>
@@ -40,7 +42,7 @@
                 $totalHarga += $harga; ?>
                 <input type="hidden" name="id_keranjang[]" value="<?= $key['id_keranjang']; ?>">
                 <tr>
-                  <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"><?= $key['nama_produk']; ?></td>
+                  <td class="align-middle"><?= $key['nama_produk']; ?></td>
                   <td class="align-middle"><?= formatRupiah($key['harga']); ?></td>
                   <td class="align-middle">
                     <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -62,6 +64,8 @@
                       </div>
                     </div>
                   </td>
+                  <td class="align-middle"><?= $key['warna']; ?></td>
+                  <td class="align-middle"><?= $key['ukuran']; ?></td>
                   <td class="align-middle" id="harga"><?= formatRupiah($harga); ?></td>
                   <td class="align-middle"><a href="<?= base_url(); ?>shop/cart/delete/<?= $key['id_keranjang']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                 </tr>
@@ -69,7 +73,6 @@
             ?>
           </tbody>
         </table>
-      </form>
     </div>
     <div class="col-lg-4">
       <!-- <form class="mb-5" action="">
@@ -81,6 +84,19 @@
         </div>
       </form> -->
       <div class="card border-secondary mb-5" style="background-color: #000000;">
+        <div class="card-header border-0">
+          <h4 class="font-weight-semi-bold m-0">Metode Pengiriman</h4>
+        </div>
+        <div class="card-body">
+          <div class="control-group">
+            <select name="metode_pengiriman" class="form-control">
+              <option disabled selected>Pilih Metode Pengiriman</option>
+              <option value="JNE">JNE</option>
+              <option value="JNT">JNT</option>
+            </select>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
         <div class="card-header border-0">
           <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
         </div>
@@ -98,8 +114,50 @@
           <div class="d-flex justify-content-between mt-2">
             <h5 class="font-weight-bold">Total</h5>
             <h5 class="font-weight-bold totalHarga"><?= formatRupiah($totalHarga); ?></h5>
+            <input type="hidden" name="harga" class="harga" id="inputHarga" value="<?= $totalHarga; ?>">
           </div>
-          <button class="btn btn-block btn-primary my-3 py-3" id="pay-button">Proceed To Checkout</button>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-block btn-primary my-3 py-3" data-toggle="modal" data-target="#checkoutModal">
+            Proceed To Checkout
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="checkoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="color: #000000;">Masukan Alamat</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="control-group">
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      placeholder="Alamat"
+                      required="required"
+                      name="alamat"
+                    ></textarea>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                  <h5 style="color: #000000;">Cara Pembayaran</h5>
+                  <ul>
+                    <li>Nama Bank: BCA</li>
+                    <li>Nama Pemilik: Riyadh</li>
+                    <li>No. Rekening: 123123123</li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </form>
+          <!-- <button class="btn btn-block btn-primary my-3 py-3" id="pay-button">Proceed To Checkout</button> -->
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@
                 <th>Order ID</th>
                 <th>Produk</th>
                 <th>Harga</th>
+                <th>Metode Pengiriman</th>
                 <th>Status</th>
                 <th>Aksi</th>
               </tr>
@@ -56,7 +57,9 @@
                           ?>
                         </div>
                       </td>
-                      <td><?= formatRupiah($detail->gross_amount); ?></td>
+                      <td><?= formatRupiah($key['harga']); ?></td>
+                      <!-- <td><?= formatRupiah($detail->gross_amount); ?></td> -->
+                      <td><?= $key['metode_pengiriman']; ?></td>
                       <td>
                         <?php
                           switch ($key['keranjang'][0]['status']) {
@@ -75,7 +78,7 @@
                       </td>
                       <td>
                         <a href="<?= base_url('order/' . $key['id_pemesanan']); ?>" class="btn btn-success">Detail</a>
-                        <a href="<?= $detail->pdf_url; ?>" class="btn btn-primary">PDF</a>
+                        <!-- <a href="<?= $detail->pdf_url; ?>" class="btn btn-primary">PDF</a> -->
                       </td>
                     </tr>
                   <?php }

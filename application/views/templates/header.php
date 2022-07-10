@@ -63,7 +63,7 @@
           <h6 class="m-0">Kategori</h6>
           <i class="fa fa-angle-down text-dark"></i>
         </a>
-        <nav class="collapse <?= $type === 'home' ? 'show' : 'position-absolute'; ?> navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-dark" id="navbar-vertical" <?= $type === 'shop' ? 'style="width: calc(100% - 30px); z-index: 1;"' : ''; ?>>
+        <nav class="collapse <?= $type === 'home' ? 'show' : 'position-absolute'; ?> navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-dark" id="navbar-vertical" <?= $type === 'shop' || $type === 'cart' || $type === 'wishlist' ? 'style="width: calc(100% - 30px); z-index: 1;"' : ''; ?>>
           <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
             <?php
               foreach ($kategori as $key) { ?>

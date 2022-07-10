@@ -112,6 +112,7 @@
         success : (result) => {
           $('#harga').html(result.harga);
           $('.totalHarga').html(result.totalHarga);
+          $('#inputHarga').val(result.plainTotalHarga.replace(/[^0-9.]/g, ''));
         }
       });
     }

@@ -8,9 +8,13 @@ class PemesananModel extends CI_Model {
     $detail = json_decode($data['detail']);
     
     return $this->db->insert('pemesanan', [
-      'id_pemesanan'  => $detail->order_id,
-      'user_id'       => $id_user,
-      'detail'        => $data['detail'],
+      // 'id_pemesanan'      => $detail->order_id,
+      'id_pemesanan'      => $data['id_order'],
+      'user_id'           => $id_user,
+      'detail'            => $data['detail'],
+      'metode_pengiriman' => $data['metode_pengiriman'],
+      'alamat'            => $data['alamat'],
+      'harga'             => $data['harga'],
     ]);
   }
 

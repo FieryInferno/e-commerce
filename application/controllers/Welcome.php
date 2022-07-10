@@ -82,6 +82,7 @@ class Welcome extends CI_Controller {
       'keranjang'       => $this->KeranjangModel->getByUser($this->session->user['id_user']),
       'jumlahKeranjang' => $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0,
       'jumlahWishlist'  => $this->session->user ? count($this->WishlistModel->getByUser($this->session->user['id_user'])) : 0,
+      'kategori'        => $this->KategoriModel->getAll(),
     ]);
   }
 
@@ -108,8 +109,9 @@ class Welcome extends CI_Controller {
     $this->output
         ->set_content_type('application/json')
         ->set_output(json_encode([
-          'harga'       => formatRupiah($data['kuantitas'] * $produk['harga']),
-          'totalHarga'  => formatRupiah($totalHarga),
+          'harga'           => formatRupiah($data['kuantitas'] * $produk['harga']),
+          'totalHarga'      => formatRupiah($totalHarga),
+          'plainTotalHarga' => $totalHarga,
         ]));
   }
 
@@ -224,6 +226,7 @@ class Welcome extends CI_Controller {
       'wishlist'        => $this->WishlistModel->getByUser($this->session->user['id_user']),
       'jumlahKeranjang' => $this->session->user ? count($this->KeranjangModel->getByUser($this->session->user['id_user'])) : 0,
       'jumlahWishlist'  => $this->session->user ? count($this->WishlistModel->getByUser($this->session->user['id_user'])) : 0,
+      'kategori'        => $this->KategoriModel->getAll(),
     ]);
   }
 
