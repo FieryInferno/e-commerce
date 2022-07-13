@@ -8,8 +8,9 @@ $route['user']                  = 'UserController';
 $route['admin/user']['get']     = 'AdminController/user';
 $route['notification']['post']   = 'Welcome/notification';
 
-$route['order']['get']        = 'OrderController';
-$route['order/(:any)']['get'] = 'OrderController/show/$1';
+$route['order']['get']          = 'OrderController';
+$route['order/(:any)']['post']  = 'OrderController/update/$1';
+$route['order/(:any)']['get']   = 'OrderController/show/$1';
 
 $route['login']['get']    = 'LoginController/user';
 $route['login']['post']   = 'LoginController/userAuth';

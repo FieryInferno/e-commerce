@@ -14,6 +14,7 @@
                 <th>Produk</th>
                 <th>Harga</th>
                 <th>Metode Pengiriman</th>
+                <th>Alamat</th>
                 <th>Status</th>
                 <th>Aksi</th>
               </tr>
@@ -60,14 +61,84 @@
                       <td><?= formatRupiah($key['harga']); ?></td>
                       <!-- <td><?= formatRupiah($detail->gross_amount); ?></td> -->
                       <td><?= $key['metode_pengiriman']; ?></td>
+                      <td><?= $key['alamat']; ?></td>
                       <td>
                         <?php
-                          switch ($key['keranjang'][0]['status']) {
+                          switch ($key['status']) {
                             case 'pending': ?>
-                              <div class="btn btn-warning">Pending</div>
+                              <!-- Button trigger modal -->
+                              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                Menunggu Pembayaran<br>
+                                Klik untuk upload bukti pembayaran
+                              </button>
+
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Upload bukti pembayaran</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <form action="<?= base_url('order/' . $key['id_pemesanan']); ?>" method="post" enctype="multipart/form-data">
+                                      <div class="modal-body">
+                                        <div class="form-group">
+                                          <label for="image">Bukti Pembayaran</label>
+                                          <div class="input-group">
+                                            <div class="custom-file">
+                                              <input
+                                                type="file"
+                                                class="custom-file-input"
+                                                id="image"
+                                                onchange="previewImg()"
+                                                name="bukti_pembayaran"
+                                              >
+                                              <label class="custom-file-label" for="image">Choose file</label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="text-center">
+                                          <div id="productImages">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Simpan Bukti Pembayaran</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
                               <?php break;
-                            case 'settlement': ?>
-                              <div class="btn btn-primary">Sudah dibayar</div>
+                            case 'sudah_dibayar': ?>
+                              <!-- Button trigger modal -->
+                              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                Menunggu Konfirmasi Admin<br>
+                                Klik untuk lihat bukti pembayaran
+                              </button>
+
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">bukti pembayaran</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <img src="<?= base_url('assets/image/' . $key['bukti_pembayaran']); ?>" alt="" width="100%">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                               <?php break;
                             
                             default:

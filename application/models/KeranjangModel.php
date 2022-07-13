@@ -38,10 +38,7 @@ class KeranjangModel extends CI_Model {
 
   public function checkout($id_keranjang, $data)
   {
-    $this->db->update('keranjang', [
-      'pemesanan_id'  => $data['id_order'],
-      'status'        => $data['status'],
-    ], ['id_keranjang'  => $id_keranjang]);
+    $this->db->update('keranjang', ['pemesanan_id'  => $data['id_order']], ['id_keranjang'  => $id_keranjang]);
   }
 
   public function pemesanan($id_pemesanan)

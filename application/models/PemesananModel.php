@@ -15,6 +15,7 @@ class PemesananModel extends CI_Model {
       'metode_pengiriman' => $data['metode_pengiriman'],
       'alamat'            => $data['alamat'],
       'harga'             => $data['harga'],
+      'status'            => $data['status'],
     ]);
   }
 
@@ -63,5 +64,10 @@ class PemesananModel extends CI_Model {
     }
 
     $this->db->update('keranjang', ['status' => $transaction_status], ['pemesanan_id' => $data->order_id]);
+  }
+
+  public function update($id_pemesanan, $data)
+  {
+    $this->db->update('pemesanan', $data, ['id_pemesanan' => $id_pemesanan]);
   }
 }

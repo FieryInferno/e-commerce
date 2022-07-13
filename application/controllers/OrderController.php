@@ -26,4 +26,23 @@ class OrderController extends CI_Controller {
 
 		$this->load->view('user/detail', $data);
   }
+
+  public function update($id_pemesanan)
+  {
+    $config['upload_path']	  = './assets/image/';
+    $config['allowed_types']  = 'jpg|jpeg|png';
+
+    $this->upload->initialize($config);
+
+    if (!$this->upload->do_upload('bukti_pembayaran')) {
+      $this->session->set_flashdata('message', $this->upload->display_errors());
+    }else {
+      $this->PemesananModel->update($id_pemesanan, [
+        'bukti_pembayaran' => $this->upload->data('file_name'),
+        'status'           => 'sudah_dibayar',
+      ]);
+      $this->session->set_flashdata('success', 'Berhasil upload bukti pembayaran');
+    }
+    redirect($_SERVER['HTTP_REFERER']);
+  }
 }
