@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 03:41 PM
+-- Generation Time: Jul 13, 2022 at 04:57 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -102,9 +102,9 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 CREATE TABLE `keranjang` (
   `id_keranjang` bigint(20) NOT NULL,
   `produk_id` varchar(191) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `warna` varchar(191) NOT NULL,
-  `ukuran` enum('xs','s','m','l','xl') NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `warna` varchar(191) DEFAULT NULL,
+  `ukuran` enum('xs','s','m','l','xl') DEFAULT NULL,
   `kuantitas` int(191) NOT NULL,
   `pemesanan_id` varchar(191) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -114,7 +114,8 @@ CREATE TABLE `keranjang` (
 --
 
 INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `pemesanan_id`) VALUES
-(20, '62ac498d4c620', 2, '', 'm', 1, '62ce7db469488');
+(20, '62ac498d4c620', 2, '', 'm', 1, '62ce7db469488'),
+(21, '62ac498d4c620', NULL, NULL, NULL, 1, '62cedce3a2d5c');
 
 -- --------------------------------------------------------
 
@@ -124,10 +125,10 @@ INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukura
 
 CREATE TABLE `pemesanan` (
   `id_pemesanan` varchar(191) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   `detail` text DEFAULT NULL,
-  `metode_pengiriman` varchar(191) NOT NULL,
-  `alamat` text NOT NULL,
+  `metode_pengiriman` varchar(191) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
   `harga` int(191) NOT NULL,
   `status` enum('pending','sudah_dibayar','konfirmasi','dikirim','selesai') NOT NULL,
   `bukti_pembayaran` varchar(191) DEFAULT NULL
@@ -138,7 +139,8 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `detail`, `metode_pengiriman`, `alamat`, `harga`, `status`, `bukti_pembayaran`) VALUES
-('62ce7db469488', 2, '', 'JNE', 'Subang', 199000, 'selesai', '13.PNG');
+('62ce7db469488', 2, '', 'JNE', 'Subang', 199000, 'selesai', '13.PNG'),
+('62cedce3a2d5c', NULL, NULL, NULL, NULL, 199000, 'selesai', NULL);
 
 -- --------------------------------------------------------
 
@@ -344,7 +346,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`
