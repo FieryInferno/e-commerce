@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 04:45 AM
+-- Generation Time: Jul 13, 2022 at 03:41 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -106,16 +106,15 @@ CREATE TABLE `keranjang` (
   `warna` varchar(191) NOT NULL,
   `ukuran` enum('xs','s','m','l','xl') NOT NULL,
   `kuantitas` int(191) NOT NULL,
-  `pemesanan_id` varchar(191) DEFAULT NULL,
-  `status` enum('pending','settlement','deny','expire','cancel') DEFAULT NULL
+  `pemesanan_id` varchar(191) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `keranjang`
 --
 
-INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `pemesanan_id`, `status`) VALUES
-(19, '62ac498d4c620', 2, 'hitam', 's', 1, '62cadf19338f9', 'pending');
+INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `pemesanan_id`) VALUES
+(20, '62ac498d4c620', 2, '', 'm', 1, '62ce7db469488');
 
 -- --------------------------------------------------------
 
@@ -129,15 +128,17 @@ CREATE TABLE `pemesanan` (
   `detail` text DEFAULT NULL,
   `metode_pengiriman` varchar(191) NOT NULL,
   `alamat` text NOT NULL,
-  `harga` int(191) NOT NULL
+  `harga` int(191) NOT NULL,
+  `status` enum('pending','sudah_dibayar','konfirmasi','dikirim','selesai') NOT NULL,
+  `bukti_pembayaran` varchar(191) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pemesanan`
 --
 
-INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `detail`, `metode_pengiriman`, `alamat`, `harga`) VALUES
-('62cadf19338f9', 2, '', 'JNE', 'a', 199000);
+INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `detail`, `metode_pengiriman`, `alamat`, `harga`, `status`, `bukti_pembayaran`) VALUES
+('62ce7db469488', 2, '', 'JNE', 'Subang', 199000, 'selesai', '13.PNG');
 
 -- --------------------------------------------------------
 
@@ -199,17 +200,16 @@ CREATE TABLE `user` (
   `nama` varchar(191) NOT NULL,
   `email` varchar(191) NOT NULL,
   `username` varchar(191) NOT NULL,
-  `password` varchar(191) NOT NULL,
-  `alamat` text NOT NULL
+  `password` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `password`, `alamat`) VALUES
-(1, 'M. Bagas Setia', 'bagassetia271@gmail.com', 'bagassetia', '$2y$10$SqlCiatMj/y9mmC0rwyR0ue66dH7l0S/Ztw3g/sIMHDIDJo7JpVDy', ''),
-(2, 'devi', 'devi@gmail.com', 'devi', '$2y$10$W9WPzVVyuEN/9m9MYLvyxuL0/GMRdGhsLLd6tp7tSz1iuh/.9WUpm', '');
+INSERT INTO `user` (`id_user`, `nama`, `email`, `username`, `password`) VALUES
+(1, 'M. Bagas Setia', 'bagassetia271@gmail.com', 'bagassetia', '$2y$10$SqlCiatMj/y9mmC0rwyR0ue66dH7l0S/Ztw3g/sIMHDIDJo7JpVDy'),
+(2, 'devi', 'devi@gmail.com', 'devi', '$2y$10$W9WPzVVyuEN/9m9MYLvyxuL0/GMRdGhsLLd6tp7tSz1iuh/.9WUpm');
 
 -- --------------------------------------------------------
 
@@ -344,7 +344,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`
