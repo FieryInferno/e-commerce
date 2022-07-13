@@ -62,4 +62,36 @@ class OrderController extends CI_Controller {
       'produk'  => $this->ProdukModel->getAll([]),
     ]);
   }
+
+  public function store()
+  {
+    $this->form_validation->set_rules('produk_id', 'Nama Barang', 'required');
+    $this->form_validation->set_rules('kuantitas', 'Jumlah Barang', 'required');
+    $this->form_validation->set_rules('harga', 'Harga Barang', 'required');
+
+    if ($this->form_validation->run() !== FALSE) {
+      $id_pemesanan = uniqid();
+
+      $this->PemesananModel->insert(null, [
+        'id_order'          => $id_pemesanan,
+        'detail'            => null,
+        'metode_pengiriman' => null,
+        'alamat'            => null,
+        'harga'             => $this->input->post('harga') * $this->input->post('kuantitas'),
+        'status'            => 'selesai',
+      ]);
+
+      $this->db->insert('keranjang', [
+        'produk_id'     => $this->input->post('produk_id'),
+        'kuantitas'     => $this->input->post('kuantitas'),
+        'pemesanan_id'  => $id_pemesanan,
+      ]);
+
+      $this->session->set_flashdata('success', 'Berhasil tambah pemesanan');
+      redirect('admin/order');
+    } else {
+      $this->session->set_flashdata('message', validation_errors());
+      redirect($_SERVER['HTTP_REFERER']);
+    }
+  }
 }

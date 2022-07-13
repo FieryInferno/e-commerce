@@ -11,7 +11,7 @@
                 <?php break;
 
               case 'select': ?>
-                <select class="form-control select2" style="width: 100%;" name="kategori_id">
+                <select class="form-control select2" style="width: 100%;" name="<?= $key; ?>">
                   <option></option>
                   <?php
                     foreach ($value['data'] as $data) { ?>

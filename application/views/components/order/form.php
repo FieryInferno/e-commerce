@@ -1,6 +1,6 @@
 <?php
   $this->load->view('components/form', [
-    'action'  => base_url('admin/order/store'),
+    'action'  => base_url('admin/order'),
     'fields' => [
       'produk_id' => [
         'label'       => 'Nama Barang',
