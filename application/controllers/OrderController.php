@@ -53,4 +53,13 @@ class OrderController extends CI_Controller {
     $this->session->set_flashdata('success', 'Berhasil ubah status');
     redirect($_SERVER['HTTP_REFERER']);
   }
+
+  public function create()
+  {
+    $this->load->view('admin/orderForm', [
+      'title'   => 'Pemesanan',
+      'active'  => 'order',
+      'produk'  => $this->ProdukModel->getAll([]),
+    ]);
+  }
 }
