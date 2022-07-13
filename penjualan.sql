@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2022 at 05:14 PM
+-- Generation Time: Jul 13, 2022 at 04:45 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -115,7 +115,7 @@ CREATE TABLE `keranjang` (
 --
 
 INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukuran`, `kuantitas`, `pemesanan_id`, `status`) VALUES
-(16, '62ac498d4c620', 2, 'hitam', 's', 1, '62b9e09e4ef19', 'settlement');
+(19, '62ac498d4c620', 2, 'hitam', 's', 1, '62cadf19338f9', 'pending');
 
 -- --------------------------------------------------------
 
@@ -126,15 +126,18 @@ INSERT INTO `keranjang` (`id_keranjang`, `produk_id`, `user_id`, `warna`, `ukura
 CREATE TABLE `pemesanan` (
   `id_pemesanan` varchar(191) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  `detail` text NOT NULL
+  `detail` text DEFAULT NULL,
+  `metode_pengiriman` varchar(191) NOT NULL,
+  `alamat` text NOT NULL,
+  `harga` int(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pemesanan`
 --
 
-INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `detail`) VALUES
-('62b9e09e4ef19', 2, '{\"status_code\":\"201\",\"status_message\":\"Success, transaction is found\",\"transaction_id\":\"74231443-34f3-4cae-86b7-be16107dd66a\",\"order_id\":\"62b9e09e4ef19\",\"gross_amount\":\"199000.00\",\"payment_type\":\"bank_transfer\",\"transaction_time\":\"2022-06-27 23:53:54\",\"transaction_status\":\"pending\",\"va_numbers\":[{\"bank\":\"bri\",\"va_number\":\"088781317584362825\"}],\"fraud_status\":\"accept\",\"pdf_url\":\"https://app.sandbox.midtrans.com/snap/v1/transactions/6f929a37-a97b-4ae9-9a07-566a145786ac/pdf\",\"finish_redirect_url\":\"http://example.com?order_id=62b9e09e4ef19&status_code=201&transaction_status=pending\"}');
+INSERT INTO `pemesanan` (`id_pemesanan`, `user_id`, `detail`, `metode_pengiriman`, `alamat`, `harga`) VALUES
+('62cadf19338f9', 2, '', 'JNE', 'a', 199000);
 
 -- --------------------------------------------------------
 
@@ -341,7 +344,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`
