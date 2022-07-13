@@ -56,3 +56,6 @@ $route['admin/produk/detail/(:any)']['get'] = 'ProdukController/show/$1';
 $route['gambar/(:any)']['post']         = 'GambarController/index/$1';
 $route['gambar']['post']                = 'GambarController/store';
 $route['gambar/delete/(:any)']['post']  = 'GambarController/destroy/$1';
+
+$route['admin/order']['get']          = 'OrderController';
+$route['admin/order/(:any)']['post']  = 'OrderController/updateStatus/$1';

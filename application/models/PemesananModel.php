@@ -70,4 +70,16 @@ class PemesananModel extends CI_Model {
   {
     $this->db->update('pemesanan', $data, ['id_pemesanan' => $id_pemesanan]);
   }
+
+  public function getAll()
+  {
+    $data = $this->db->get('pemesanan')->result_array();
+
+    for ($i=0; $i < count($data); $i++) {
+      $key                    = $data[$i];
+      $data[$i]['keranjang']  = $this->KeranjangModel->pemesanan($key['id_pemesanan']);
+    }
+
+    return $data;
+  }
 }

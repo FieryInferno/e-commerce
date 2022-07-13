@@ -6,15 +6,16 @@ class OrderController extends CI_Controller {
   public function __construct()
   {
     parent::__construct();
-    isUser();
+    isLogin();
   }
   
 	public function index()
 	{
-		$this->load->view('user/order', [
+
+		$this->load->view('order', [
       'title'   => 'Pemesanan',
       'active'  => 'order',
-      'order'   => $this->PemesananModel->getByIdUser($this->session->user['id_user']),
+      'order'   => $this->session->admin ? $this->PemesananModel->getAll() : $this->PemesananModel->getByIdUser($this->session->user['id_user']),
     ]);
 	}
 
@@ -43,6 +44,13 @@ class OrderController extends CI_Controller {
       ]);
       $this->session->set_flashdata('success', 'Berhasil upload bukti pembayaran');
     }
+    redirect($_SERVER['HTTP_REFERER']);
+  }
+
+  public function updateStatus($id_pemesanan)
+  {
+    $this->PemesananModel->update($id_pemesanan, $this->input->post());
+    $this->session->set_flashdata('success', 'Berhasil ubah status');
     redirect($_SERVER['HTTP_REFERER']);
   }
 }

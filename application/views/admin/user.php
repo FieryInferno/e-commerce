@@ -13,7 +13,6 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Username</th>
-                <th>Alamat</th>
               </tr>
               </thead>
               <tbody>
@@ -25,7 +24,6 @@
                       <td><?= $key['nama']; ?></td>
                       <td><?= $key['email']; ?></td>
                       <td><?= $key['username']; ?></td>
-                      <td><?= $key['alamat']; ?></td>
                     </tr>
                   <?php }
                 ?>

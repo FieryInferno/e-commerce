@@ -4,9 +4,9 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="<?= base_url(); ?>assets/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  </div> -->
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -73,6 +73,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?= base_url(); ?>admin/order" class="nav-link <?= $active === 'order' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Order</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?= base_url(); ?>admin/user" class="nav-link <?= $active === 'user' ? 'active' : ''; ?>">
                   <i class="nav-icon fas fa-user"></i>
                   <p>User</p>
@@ -107,12 +113,6 @@
                 <a href="<?= base_url(); ?>order" class="nav-link <?= $active === 'order' ? 'active' : ''; ?>">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>My Order</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url(); ?>user/address" class="nav-link <?= $active === 'address' ? 'active' : ''; ?>">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>Alamat</p>
                 </a>
               </li>
             <?php }
