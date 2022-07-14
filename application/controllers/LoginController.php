@@ -11,7 +11,12 @@ class LoginController extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/login');
+		$this->load->view('components/login', ['role' => 'admin']);
+	}
+
+	public function developer()
+	{
+		$this->load->view('components/login', ['role' => 'developer']);
 	}
 
 	public function user()
