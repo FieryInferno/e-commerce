@@ -1,6 +1,6 @@
 <?php
   $this->load->view('components/form', [
-    'action'  => base_url('admin/order'),
+    'action'  => base_url('admin/stok'),
     'fields' => [
       'produk_id' => [
         'label'       => 'Nama Barang',
@@ -9,15 +9,14 @@
         'labelOption' => 'nama_produk',
         'data'        => $produk,
       ],
-      'kuantitas' => [
+      'jumlah' => [
         'label'       => 'Jumlah Barang',
         'type'        => 'input',
         'placeholder' => 'Masukan jumlah barang',
       ],
-      'harga' => [
-        'label'       => 'Harga Barang',
-        'type'        => 'input',
-        'placeholder' => 'Masukan harga barang',
+      'tipe' => [
+        'type'  => 'hidden',
+        'value' => $this->session->admin ? 'barang_masuk' : 'barang_keluar',
       ],
     ]
   ]);

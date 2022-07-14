@@ -44,4 +44,9 @@ class StokModel extends CI_Model {
 
     return $jumlah;
   }
+
+  public function insert($data)
+  {
+    $this->db->insert('stok', $data);
+  }
 }

@@ -62,4 +62,6 @@ $route['admin/order']['post']         = 'OrderController/store';
 $route['admin/order/create']['get']   = 'OrderController/create';
 $route['admin/order/(:any)']['post']  = 'OrderController/updateStatus/$1';
 
-$route['admin/stok']['get'] = 'StokController';
+$route['admin/stok']['get']         = 'StokController';
+$route['admin/stok']['post']        = 'StokController/store';
+$route['admin/stok/create']['get']  = 'StokController/create';
