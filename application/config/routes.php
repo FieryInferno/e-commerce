@@ -38,7 +38,9 @@ $route['admin']['get']        = 'AdminController';
 $route['admin/login']['get']  = 'LoginController';
 $route['admin/login']['post'] = 'LoginController/adminAuth';
 
+$route['developer']['get']        = 'DeveloperController';
 $route['developer/login']['get']  = 'LoginController/developer';
+$route['developer/login']['post'] = 'LoginController/developerAuth';
 
 $route['admin/kategori']['get']               = 'KategoriController';
 $route['admin/kategori/tambah']['get']        = 'KategoriController/create';

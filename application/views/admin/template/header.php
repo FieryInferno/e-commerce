@@ -46,7 +46,17 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block"><?= $this->session->admin ? $this->session->admin['username'] : $this->session->user['username']; ?></a>
+          <a href="#" class="d-block">
+            <?php
+              if ($this->session->admin) {
+                echo $this->session->admin['username'];
+              } else if($this->session->developer) {
+                echo $this->session->developer['username'];
+              } else {
+                echo $this->session->user['username'];
+              }
+            ?>
+          </a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -88,6 +98,19 @@
                 <a href="<?= base_url(); ?>admin/user" class="nav-link <?= $active === 'user' ? 'active' : ''; ?>">
                   <i class="nav-icon fas fa-user"></i>
                   <p>User</p>
+                </a>
+              </li>
+            <?php } else if ($this->session->developer) { ?>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>developer" class="nav-link <?= $active === 'dashboard' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>stok" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Pengelolaan Stok</p>
                 </a>
               </li>
             <?php } else { ?>

@@ -27,6 +27,24 @@ class LoginController extends CI_Controller {
     ]);
 	}
 
+  public function developerAuth()
+  {
+    $result = $this->DeveloperModel->login();
+
+    if ($result) {
+      if (password_verify($this->input->post('password'), $result['password'])) {
+        $this->session->set_userdata('developer', $result);
+        redirect('/developer');
+      } else {
+        $this->session->set_flashdata('message', 'Password Salah');
+      }
+    } else {
+      $this->session->set_flashdata('message', 'Username Salah');
+    }
+
+    redirect($_SERVER['HTTP_REFERER']);
+  }
+
   public function adminAuth()
   {
     $result = $this->AdminModel->login();
