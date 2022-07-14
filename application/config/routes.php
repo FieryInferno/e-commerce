@@ -42,6 +42,10 @@ $route['developer']['get']        = 'DeveloperController';
 $route['developer/login']['get']  = 'LoginController/developer';
 $route['developer/login']['post'] = 'LoginController/developerAuth';
 
+$route['developer/stok']['get']         = 'StokController';
+$route['developer/stok']['post']        = 'StokController/store';
+$route['developer/stok/create']['get']  = 'StokController/create';
+
 $route['admin/kategori']['get']               = 'KategoriController';
 $route['admin/kategori/tambah']['get']        = 'KategoriController/create';
 $route['admin/kategori/tambah']['post']       = 'KategoriController/store';

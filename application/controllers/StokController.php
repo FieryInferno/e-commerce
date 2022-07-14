@@ -11,7 +11,7 @@ class StokController extends CI_Controller {
   
 	public function index()
 	{
-		$this->load->view('admin/stok/index', [
+		$this->load->view($this->session->admin ? 'admin' : 'developer' . '/stok/index', [
       'title'   => 'Stok',
       'active'  => 'stok',
       'stok'    => $this->StokModel->getAll(),
@@ -20,7 +20,7 @@ class StokController extends CI_Controller {
 
   public function create()
   {
-		$this->load->view('admin/stok/form', [
+		$this->load->view($this->session->admin ? 'admin' : 'developer' . '/stok/form', [
       'title'   => 'Stok',
       'active'  => 'stok',
       'produk'  => $this->ProdukModel->getAll([]),
@@ -35,7 +35,7 @@ class StokController extends CI_Controller {
     if ($this->form_validation->run() !== FALSE) {
       $this->StokModel->insert($this->input->post());
       $this->session->set_flashdata('success', 'Berhasil tambah data stok');
-      redirect('admin/stok');
+      redirect($this->session->admin ? 'admin' : 'developer' . '/stok');
     } else {
       $this->session->set_flashdata('message', validation_errors());
       redirect($_SERVER['HTTP_REFERER']);
