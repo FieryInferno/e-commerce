@@ -199,7 +199,7 @@
               
             case 'selesai':
               return <<<HTML
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Pesanan selesai</button>
+                <button type="button" class="btn btn-success">Pesanan selesai</button>
               HTML;
               break;
             
