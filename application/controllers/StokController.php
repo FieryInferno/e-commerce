@@ -11,7 +11,7 @@ class StokController extends CI_Controller {
   
 	public function index()
 	{
-		$this->load->view($this->session->admin ? 'admin' : 'developer' . '/stok/index', [
+		$this->load->view($this->session->admin ? 'admin/stok/index' : 'developer/stok/index', [
       'title'   => 'Stok',
       'active'  => 'stok',
       'stok'    => $this->StokModel->getAll(),
