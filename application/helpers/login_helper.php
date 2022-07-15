@@ -25,6 +25,17 @@
     }
   }
 
+  if ( ! function_exists('isDeveloper'))
+  {
+    function isDeveloper(){
+      $CI =& get_instance();
+      
+      if (!$CI->session->developer) {
+        redirect('404_override');
+      }
+    }
+  }
+
   if ( ! function_exists('isUser'))
   {
     function isUser(){

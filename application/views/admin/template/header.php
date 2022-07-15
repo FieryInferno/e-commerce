@@ -4,9 +4,9 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  <!-- <div class="preloader flex-column justify-content-center align-items-center">
+  <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="<?= base_url(); ?>assets/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div> -->
+  </div>
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -46,7 +46,17 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block"><?= $this->session->admin ? $this->session->admin['username'] : $this->session->user['username']; ?></a>
+          <a href="#" class="d-block">
+            <?php
+              if ($this->session->admin) {
+                echo $this->session->admin['username'];
+              } else if($this->session->developer) {
+                echo $this->session->developer['username'];
+              } else {
+                echo $this->session->user['username'];
+              }
+            ?>
+          </a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -79,9 +89,28 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?= base_url(); ?>admin/stok" class="nav-link <?= $active === 'stok' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Pengelolaan Stok</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?= base_url(); ?>admin/user" class="nav-link <?= $active === 'user' ? 'active' : ''; ?>">
                   <i class="nav-icon fas fa-user"></i>
                   <p>User</p>
+                </a>
+              </li>
+            <?php } else if ($this->session->developer) { ?>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>developer" class="nav-link <?= $active === 'dashboard' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url(); ?>developer/stok" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>Pengelolaan Stok</p>
                 </a>
               </li>
             <?php } else { ?>

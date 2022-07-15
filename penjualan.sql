@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2022 at 04:57 PM
+-- Generation Time: Jul 15, 2022 at 01:26 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -39,6 +39,25 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
 (1, 'admin', '$2y$10$7lEIrIT.Wui91v.rDO7TiOVs6kESSitOnWEmvYLCizNsOtBfNd8e6');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `developer`
+--
+
+CREATE TABLE `developer` (
+  `id_developer` bigint(20) NOT NULL,
+  `username` varchar(191) NOT NULL,
+  `password` varchar(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `developer`
+--
+
+INSERT INTO `developer` (`id_developer`, `username`, `password`) VALUES
+(1, 'developer', '$2y$10$WDf.kwbV4iFfIAJ161Vx9eDu//CrScxuZNz6CiEsx7/u8nxka/irm');
 
 -- --------------------------------------------------------
 
@@ -170,6 +189,29 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga`, `diskon`, `deskripsi`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `stok`
+--
+
+CREATE TABLE `stok` (
+  `id_stok` bigint(20) NOT NULL,
+  `produk_id` varchar(191) NOT NULL,
+  `tipe` enum('barang_masuk','barang_keluar') NOT NULL,
+  `jumlah` int(191) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `stok`
+--
+
+INSERT INTO `stok` (`id_stok`, `produk_id`, `tipe`, `jumlah`) VALUES
+(1, '62ac498d4c620', 'barang_masuk', 10),
+(2, '62ac498d4c620', 'barang_masuk', 1),
+(3, '62ac498d4c620', 'barang_keluar', 1),
+(4, '62ac8fd8370a5', 'barang_keluar', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ukuran_produk`
 --
 
@@ -257,6 +299,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
+-- Indexes for table `developer`
+--
+ALTER TABLE `developer`
+  ADD PRIMARY KEY (`id_developer`);
+
+--
 -- Indexes for table `gambar`
 --
 ALTER TABLE `gambar`
@@ -291,6 +339,12 @@ ALTER TABLE `pemesanan`
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`),
   ADD KEY `kategori_id` (`kategori_id`);
+
+--
+-- Indexes for table `stok`
+--
+ALTER TABLE `stok`
+  ADD PRIMARY KEY (`id_stok`);
 
 --
 -- Indexes for table `ukuran_produk`
@@ -331,6 +385,12 @@ ALTER TABLE `admin`
   MODIFY `id_admin` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `developer`
+--
+ALTER TABLE `developer`
+  MODIFY `id_developer` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `gambar`
 --
 ALTER TABLE `gambar`
@@ -347,6 +407,12 @@ ALTER TABLE `kategori`
 --
 ALTER TABLE `keranjang`
   MODIFY `id_keranjang` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `stok`
+--
+ALTER TABLE `stok`
+  MODIFY `id_stok` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ukuran_produk`

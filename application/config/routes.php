@@ -38,6 +38,14 @@ $route['admin']['get']        = 'AdminController';
 $route['admin/login']['get']  = 'LoginController';
 $route['admin/login']['post'] = 'LoginController/adminAuth';
 
+$route['developer']['get']        = 'DeveloperController';
+$route['developer/login']['get']  = 'LoginController/developer';
+$route['developer/login']['post'] = 'LoginController/developerAuth';
+
+$route['developer/stok']['get']         = 'StokController';
+$route['developer/stok']['post']        = 'StokController/store';
+$route['developer/stok/create']['get']  = 'StokController/create';
+
 $route['admin/kategori']['get']               = 'KategoriController';
 $route['admin/kategori/tambah']['get']        = 'KategoriController/create';
 $route['admin/kategori/tambah']['post']       = 'KategoriController/store';
@@ -61,3 +69,7 @@ $route['admin/order']['get']          = 'OrderController';
 $route['admin/order']['post']         = 'OrderController/store';
 $route['admin/order/create']['get']   = 'OrderController/create';
 $route['admin/order/(:any)']['post']  = 'OrderController/updateStatus/$1';
+
+$route['admin/stok']['get']         = 'StokController';
+$route['admin/stok']['post']        = 'StokController/store';
+$route['admin/stok/create']['get']  = 'StokController/create';
