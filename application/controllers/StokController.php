@@ -20,7 +20,7 @@ class StokController extends CI_Controller {
 
   public function create()
   {
-		$this->load->view($this->session->admin ? 'admin' : 'developer' . '/stok/form', [
+		$this->load->view($this->session->admin ? 'admin/stok/form' : 'developer/stok/form', [
       'title'   => 'Stok',
       'active'  => 'stok',
       'produk'  => $this->ProdukModel->getAll([]),
