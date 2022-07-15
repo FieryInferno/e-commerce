@@ -70,7 +70,7 @@ class LoginController extends CI_Controller {
     if ($result) {
       if (password_verify($this->input->post('password'), $result['password'])) {
         $this->session->set_userdata('user', $result);
-        redirect('/user');
+        redirect('/shop');
       } else {
         $this->session->set_flashdata('message', 'Password Salah');
       }
