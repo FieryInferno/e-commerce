@@ -45,6 +45,7 @@ class KeranjangModel extends CI_Model {
   {
     $this->db->join('produk', 'keranjang.produk_id = produk.id_produk');
     $this->db->join('kategori', 'produk.kategori_id = kategori.id_kategori');
+    $this->db->join('user', 'keranjang.user_id = user.id_user');
     $data = $this->db->get_where('keranjang', ['pemesanan_id' => $id_pemesanan])->result_array();
 
     for ($i=0; $i < count($data); $i++) {

@@ -3,6 +3,11 @@
 <section class="content">
   <!-- Default box -->
   <div class="card card-solid">
+    <div class="card-body">
+      Nama Pembeli: <?php print_r($keranjang[0]['nama']); ?>
+    </div>
+  </div>
+  <div class="card card-solid">
     <div class="card-body pb-0">
       <div class="row">
         <?php
