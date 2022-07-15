@@ -35,7 +35,7 @@ class StokController extends CI_Controller {
     if ($this->form_validation->run() !== FALSE) {
       $this->StokModel->insert($this->input->post());
       $this->session->set_flashdata('success', 'Berhasil tambah data stok');
-      redirect($this->session->admin ? 'admin' : 'developer' . '/stok');
+      redirect($this->session->admin ? 'admin/stok' : 'developer/stok');
     } else {
       $this->session->set_flashdata('message', validation_errors());
       redirect($_SERVER['HTTP_REFERER']);

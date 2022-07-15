@@ -16,7 +16,7 @@
       ],
       'tipe' => [
         'type'  => 'hidden',
-        'value' => $this->session->admin ? 'barang_masuk' : 'barang_keluar',
+        'value' => $this->session->admin ? 'barang_keluar' : 'barang_masuk',
       ],
     ]
   ]);
