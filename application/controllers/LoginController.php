@@ -11,7 +11,12 @@ class LoginController extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/login');
+		$this->load->view('components/login', ['role' => 'admin']);
+	}
+
+	public function developer()
+	{
+		$this->load->view('components/login', ['role' => 'developer']);
 	}
 
 	public function user()
@@ -21,6 +26,24 @@ class LoginController extends CI_Controller {
       'type'      => 'login'
     ]);
 	}
+
+  public function developerAuth()
+  {
+    $result = $this->DeveloperModel->login();
+
+    if ($result) {
+      if (password_verify($this->input->post('password'), $result['password'])) {
+        $this->session->set_userdata('developer', $result);
+        redirect('/developer');
+      } else {
+        $this->session->set_flashdata('message', 'Password Salah');
+      }
+    } else {
+      $this->session->set_flashdata('message', 'Username Salah');
+    }
+
+    redirect($_SERVER['HTTP_REFERER']);
+  }
 
   public function adminAuth()
   {
@@ -47,7 +70,7 @@ class LoginController extends CI_Controller {
     if ($result) {
       if (password_verify($this->input->post('password'), $result['password'])) {
         $this->session->set_userdata('user', $result);
-        redirect('/user');
+        redirect('/shop');
       } else {
         $this->session->set_flashdata('message', 'Password Salah');
       }
