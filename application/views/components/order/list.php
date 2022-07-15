@@ -146,7 +146,7 @@
                       <form action="' . base_url('admin/order/' . $data['id_pemesanan']) . '" method="post">
                         <input type="hidden" name="status" value="dikirim">
                         <div class="modal-body">
-                          Ubah status menjadi barang?
+                          Ubah status menjadi dikirim?
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
