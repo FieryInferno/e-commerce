@@ -53,6 +53,14 @@ $route['admin/kategori/edit/(:num)']['get']   = 'KategoriController/edit/$1';
 $route['admin/kategori/edit/(:num)']['post']  = 'KategoriController/update/$1';
 $route['admin/kategori/hapus/(:num)']['post'] = 'KategoriController/destroy/$1';
 
+$route['developer/produk']['get']               = 'ProdukController';
+$route['developer/produk/tambah']['get']        = 'ProdukController/create';
+$route['developer/produk/tambah']['post']       = 'ProdukController/store';
+$route['developer/produk/edit/(:any)']['get']   = 'ProdukController/edit/$1';
+$route['developer/produk/edit/(:any)']['post']  = 'ProdukController/update/$1';
+$route['developer/produk/hapus/(:any)']['post'] = 'ProdukController/destroy/$1';
+$route['developer/produk/detail/(:any)']['get'] = 'ProdukController/show/$1';
+
 $route['admin/produk']['get']               = 'ProdukController';
 $route['admin/produk/tambah']['get']        = 'ProdukController/create';
 $route['admin/produk/tambah']['post']       = 'ProdukController/store';

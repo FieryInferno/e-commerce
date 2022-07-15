@@ -3,15 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ProdukController extends CI_Controller {
   
-  public function __construct()
-  {
-    parent::__construct();
-    isAdmin();
-  }
+  // public function __construct()
+  // {
+  //   parent::__construct();
+  //   isAdmin();
+  // }
   
 	public function index()
 	{
-		$this->load->view('admin/produk/index', [
+		$this->load->view($this->session->admin ? 'admin/produk/index' : 'developer/produk/index', [
       'title'   => 'Produk',
       'active'  => 'produk',
       'produk'  => $this->ProdukModel->getAll([]),
@@ -20,7 +20,7 @@ class ProdukController extends CI_Controller {
   
 	public function create()
 	{
-		$this->load->view('admin/produk/form', [
+		$this->load->view($this->session->admin ? 'admin/produk/form' : 'developer/produk/form', [
       'title'     => 'Tambah Produk',
       'active'    => 'produk',
       'type'      => 'add',
@@ -41,7 +41,7 @@ class ProdukController extends CI_Controller {
 
     $this->ProdukModel->store($data, $this->input->post('warna'), $this->input->post('ukuran'));
     $this->session->set_flashdata('success', 'Berhasil tambah produk');
-    redirect('/admin/produk');
+    redirect($this->session->admin ? 'admin/produk' : 'developer/produk');
 	}
   
 	public function edit($id)
@@ -52,7 +52,7 @@ class ProdukController extends CI_Controller {
     $data['type']     = 'edit';
     $data['kategori'] = $this->KategoriModel->getAll();
 
-		$this->load->view('admin/produk/form', $data);
+		$this->load->view($this->session->admin ? 'admin/produk/form' : 'developer/produk/form', $data);
 	}
   
 	public function update($id)
@@ -67,14 +67,14 @@ class ProdukController extends CI_Controller {
 
     $this->ProdukModel->update($id, $data, $this->input->post('warna'), $this->input->post('ukuran'));
     $this->session->set_flashdata('success', 'Berhasil edit produk');
-    redirect('/admin/produk');
+    redirect($this->session->admin ? 'admin/produk' : 'developer/produk');
 	}
   
 	public function destroy($id)
 	{
     $this->ProdukModel->destroy($id);
     $this->session->set_flashdata('success', 'Berhasil hapus produk');
-    redirect('/admin/produk');
+    redirect($this->session->admin ? 'admin/produk' : 'developer/produk');
 	}
 
   public function show($id_produk)
@@ -83,6 +83,6 @@ class ProdukController extends CI_Controller {
     $data['active'] = 'produk';
     $data['title']  = 'Detail Produk';
 
-    $this->load->view('admin/produk/detail', $data);
+    $this->load->view($this->session->admin ? 'admin/produk' : 'developer/produk', $data);
   }
 }

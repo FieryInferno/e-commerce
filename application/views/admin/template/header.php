@@ -108,6 +108,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?= base_url(); ?>developer/produk" class="nav-link <?= $active === 'produk' ? 'active' : ''; ?>">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>Produk</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?= base_url(); ?>developer/stok" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
                   <p>Pengelolaan Stok</p>
